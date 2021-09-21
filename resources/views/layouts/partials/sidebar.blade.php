@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link {{ (request()->segment(2) == 'dashboard') ? 'active' : '' }}" href="#">
+          <a class="nav-link {{ (request()->segment(2) == 'dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fas fa-home {{ (request()->segment(2) != 'dashboard') ? 'text-dark' : '' }}" style="font-size: 13px; top: 0px !important"></i>
             </div>
@@ -18,9 +18,9 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="#">
+          <a class="nav-link {{ (request()->segment(1) == 'boardingHouses') ? 'active' : '' }}" href="{{ route('boardingHouses.index') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fas fa-hotel text-dark" style="font-size: 13px; top: 0px !important"></i>
+              <i class="fas fa-hotel {{ (request()->segment(1) != 'boardingHouses') ? 'text-dark' : '' }}" style="font-size: 13px; top: 0px !important"></i>
             </div>
             <span class="nav-link-text ms-1">Informasi Rumah Kos</span>
           </a>

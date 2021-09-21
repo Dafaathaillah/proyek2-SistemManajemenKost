@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::view('admin/dashboard', 'dashboard.admin')->name('admin.dashboard');
+    Route::resource('boardingHouses', BoardingHouseController::class);
 });
 
 Route::middleware(['auth', 'customer'])->group(function () {
