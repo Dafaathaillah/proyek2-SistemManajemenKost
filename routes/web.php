@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardingHouseController;
+use App\Http\Controllers\FacilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Auth::routes();
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::view('admin/dashboard', 'dashboard.admin')->name('admin.dashboard');
     Route::resource('boardingHouses', BoardingHouseController::class);
+    Route::resource('facilities', FacilityController::class);
 });
 
 Route::middleware(['auth', 'customer'])->group(function () {
