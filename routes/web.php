@@ -19,10 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware('auth')->group(function () {
-    Route::view('dashboard', 'dashboard.index')->name('dashboard');
-    Route::prefix('elements')->group(function () {
-        Route::view('table', 'elements.tables')->name('elements.table');
-        Route::view('form', 'elements.forms')->name('elements.form');
-    });
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::view('admin/dashboard', 'dashboard.admin')->name('admin.dashboard');
+});
+Route::middleware(['auth', 'customer'])->group(function () {
+    Route::view('customer/dashboard', 'dashboard.customer')->name('customer.dashboard');
 });
