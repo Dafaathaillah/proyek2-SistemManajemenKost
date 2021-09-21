@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BoardingHouseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Auth::routes();
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::view('admin/dashboard', 'dashboard.admin')->name('admin.dashboard');
 });
+
 Route::middleware(['auth', 'customer'])->group(function () {
     Route::view('customer/dashboard', 'dashboard.customer')->name('customer.dashboard');
 });
