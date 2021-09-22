@@ -33,7 +33,7 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="{{ asset('assets/css/soft-ui-dashboard.css?v=1.0.3') }}" rel="stylesheet" />
+  <link id="pagestyle" href="{{ asset('assets/css/soft-ui-dashboard.min.css?v=1.0.4') }}" rel="stylesheet" />
   <link href="{{ asset('css/soft-ui-dashboard.css') }}" rel="stylesheet" />
   <!-- Custom Page CSS -->
   @stack('style')
