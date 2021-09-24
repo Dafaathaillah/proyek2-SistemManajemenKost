@@ -21,7 +21,7 @@
                 <h5>Tambah Fasilitas Baru</h5>
             </div>
             <div class="card-body pt-0">
-                <form action="" method="">
+                <form action="{{ route('facilities.store') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-12">
@@ -40,7 +40,7 @@
                         </div>
                     </div>               
                     <div class="d-flex justify-content-end mt-4">
-                        <a href="{{ route('facilities.index') }}"" class="btn btn-light m-0">Cancel</a>
+                        <a href="{{ route('facilities.index') }}" class="btn btn-light m-0">Cancel</a>
                         <button type="submit" name="button" class="btn bg-gradient-primary m-0 ms-2">Simpan</button>
                     </div>
                 </form>

@@ -14,7 +14,7 @@ class FacilityController extends Controller
      */
     public function index()
     {
-        return view('facilities.index');
+        return view('facilities.index', ['facilities' => Facility::index()]);
     }
 
     /**
@@ -35,7 +35,9 @@ class FacilityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Facility::store($request);
+        return redirect()->route('facilities.index');
     }
 
     /**
@@ -57,7 +59,7 @@ class FacilityController extends Controller
      */
     public function edit(Facility $facility)
     {
-        //
+        return view('facilities.edit', ['facility' => $facility]);
     }
 
     /**
@@ -69,7 +71,8 @@ class FacilityController extends Controller
      */
     public function update(Request $request, Facility $facility)
     {
-        //
+        Facility::edit($request, $facility);
+        return redirect()->route('facilities.index');
     }
 
     /**
@@ -80,6 +83,7 @@ class FacilityController extends Controller
      */
     public function destroy(Facility $facility)
     {
-        //
+        $facility->delete();
+        return redirect()->route('facilities.index');
     }
 }
