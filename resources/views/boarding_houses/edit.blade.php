@@ -26,17 +26,18 @@
                 <div class="col-sm-auto col-8 my-auto">
                     <div class="h-100">
                         <h5 class="mb-1 font-weight-bolder">
-                            Bougenville Kost
+                            {{ $boardingHouse->name }}
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
-                            Jl. Simpang Remujung No. 5
+                            {{ $boardingHouse->address }}
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-        <form action="{{ route('boardingHouses.store') }}" method="POST" id="form">
+        <form action="{{ route('boardingHouses.update', $boardingHouse->id) }}" method="POST" id="form">
             @csrf
+            @method('PUT')
             <!-- Card Informasi Rumah Kos -->
             <div class="card mt-4" id="basic-info">
                 <div class="card-header">
@@ -48,14 +49,14 @@
                             <label class="form-label">Nama Rumah Kos <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <input id="name" name="name" class="form-control" type="text" placeholder="Boarding house name"
-                                    required="required" value="{{ old('name') }}">
+                                    required="required" value="{{ $boardingHouse->name }}">
                             </div>
                         </div>
                         <div class="col-6">
                             <label class="form-label">Pemilik Rumah Kos <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <input id="owner" name="owner" class="form-control" type="text"
-                                    placeholder="Owner" required="required" value="{{ old('owner') }}">
+                                    placeholder="Owner" required="required" value="{{ $boardingHouse->owner }}">
                             </div>
                         </div>
                     </div>
@@ -63,7 +64,7 @@
                         <div class="col-12">
                             <label class="form-label mt-4">Deskripsi</label>
                             <div class="input-group">
-                                <textarea id="description" name="description" class="form-control" cols="30" rows="5">{{ old('description') }}</textarea>
+                                <textarea id="description" name="description" class="form-control" cols="30" rows="5">{{ $boardingHouse->description }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -71,16 +72,17 @@
                         <div class="col-6">
                             <label class="form-label mt-4">Provinsi <span class="text-danger">*</span></label>
                             <select id="province" name="province_id" class="form-control" required>
-                                <option hidden selected disabled>Select province...</option>
-                                @foreach ($provinces as $province)
-                                    <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                @foreach ($provinces as $p)
+                                    <option value="{{ $p->id }}" {{ $p->id == $boardingHouse->village->district->regency->province_id ? 'selected' : '' }}>{{ $p->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-6">
                             <label class="form-label mt-4">Kota/Kabupaten <span class="text-danger">*</span></label>
                             <select id="regency" name="regency_id" class="form-control" required>
-                                <option hidden selected disabled>Select regency...</option>
+                                @foreach ($regencies as $r)
+                                    <option value="{{ $r->id }}" {{ $r->id == $boardingHouse->village->district->regency_id ? 'selected' : '' }}>{{ $r->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -88,20 +90,24 @@
                         <div class="col-4">
                             <label class="form-label mt-4">Kecamatan <span class="text-danger">*</span></label>
                             <select id="district" name="district_id" class="form-control" required>
-                                <option hidden selected disabled>Select district...</option>
+                                @foreach ($districts as $d)
+                                    <option value="{{ $d->id }}" {{ $d->id == $boardingHouse->village->district_id ? 'selected' : '' }}>{{ $d->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-4">
                             <label class="form-label mt-4">Kelurahan/Desa <span class="text-danger">*</span></label>
                             <select id="village" name="village_id" class="form-control" required>
-                                <option hidden selected disabled>Select village...</option>
+                                @foreach ($villages as $v)
+                                    <option value="{{ $v->id }}" {{ $v->id == $boardingHouse->village_id ? 'selected' : '' }}>{{ $v->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-4">
                             <label class="form-label mt-4">Kode Pos</label>
                             <div class="input-group">
                                 <input id="postal_code" name="postal_code" class="form-control" type="text"
-                                    placeholder="Postal code" value="{{ old('postal_code') }}">
+                                    placeholder="Postal code" value="{{ $boardingHouse->postal_code }}">
                             </div>
                         </div>
                     </div>
@@ -109,7 +115,7 @@
                         <div class="col-12">
                             <label class="form-label mt-4">Alamat <span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <textarea id="address" name="address" class="form-control" cols="30" rows="5" required>{{ old('address') }}</textarea>
+                                <textarea id="address" name="address" class="form-control" cols="30" rows="5" required>{{ $boardingHouse->address }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -118,14 +124,14 @@
                             <label class="form-label mt-4">Nomor Telepon</label>
                             <div class="input-group">
                                 <input id="phone_number" name="phone_number" class="form-control" type="text"
-                                    placeholder="0341 7356 314" value="{{ old('phone_number') }}">
+                                    placeholder="0341 7356 314" value="{{ $boardingHouse->phone_number }}">
                             </div>
                         </div>
                         <div class="col-6">
                             <label class="form-label mt-4">Nomor WhatsApp</label>
                             <div class="input-group">
                                 <input id="whatsapp_number" name="whatsapp_number" class="form-control" type="text"
-                                    placeholder="085 735 631 620" value="{{ old('whatsapp_number') }}">
+                                    placeholder="085 735 631 620" value="{{ $boardingHouse->whatsapp_number }}">
                             </div>
                         </div>
                     </div>
@@ -138,14 +144,7 @@
                 </div>
                 <div class="card-body pt-0">
                     <div id="editor">
-                        <p>Tambahkan aturan rumah kos di bagian sini.</p>
-                        <p>Anda dapat menggunakan fitur-fitur yang terdapat di bagian toolbar atas, seperti</p>
-                        <ul>
-                            <li>List</li>
-                            <li><b>Bold</b></li>
-                            <li><i>Italic</i></li>
-                            <li><u>Underline</u></li>
-                        </ul>
+                        {!! $boardingHouse->rule !!}
                     </div>
                     <textarea name="rule" style="display:none" id="rule"></textarea>
                 </div>
