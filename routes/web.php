@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardingHouseController;
+use App\Http\Controllers\RegencyController;
+use App\Http\Controllers\DistrictController;
+use App\Http\Controllers\VillageController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\RoomController;
 
@@ -25,6 +28,9 @@ Auth::routes();
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::view('admin/dashboard', 'dashboard.admin')->name('admin.dashboard');
     Route::resource('boardingHouses', BoardingHouseController::class);
+    Route::get('regencies/{id}', [RegencyController::class, 'index']);
+    Route::get('districts/{id}', [DistrictController::class, 'index']);
+    Route::get('villages/{id}', [VillageController::class, 'index']);
     Route::resource('facilities', FacilityController::class);
     Route::resource('rooms', RoomController::class);
 });
