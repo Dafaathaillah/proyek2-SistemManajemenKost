@@ -60,8 +60,7 @@
                         </div>
                         <!-- Root element of PhotoSwipe. Must have class pswp. -->
                         <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-                            <!-- Background of PhotoSwipe.
-It's a separate element, as animating opacity is faster than rgba(). -->
+                            <!-- Background of PhotoSwipe. It's a separate element, as animating opacity is faster than rgba(). -->
                             <div class="pswp__bg"></div>
                             <!-- Slides wrapper with overflow:hidden. -->
                             <div class="pswp__scroll-wrap">
@@ -107,23 +106,19 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                         </div>
                     </div>
                     <div class="col-lg-5 mx-auto">
-                        <h3 class="mt-lg-0 mt-4">Kamar 01</h3>
+                        <h3 class="mt-lg-0 mt-4">{{ $room->name }}</h3>
                         <div class="rating">
-                            <i class="fas fa-star" aria-hidden="true"></i>
-                            <i class="fas fa-star" aria-hidden="true"></i>
-                            <i class="fas fa-star" aria-hidden="true"></i>
-                            <i class="fas fa-star" aria-hidden="true"></i>
-                            <i class="fas fa-star-half-alt" aria-hidden="true"></i>
+                            {{ $room->type }}
                         </div>
                         <br>
                         <h6 class="mb-0 mt-3">Harga</h6>
-                        <h5>Rp 450.000,-</h5>
+                        <h5>Rp {{ number_format($room->price,0,',','.') }}</h5>
                         <span class="badge badge-success text-dark">Tersedia</span>
                         <br>
                         <label class="mt-4">Deskripsi</label>
-                        <p style="margin-left: 5px">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
-                            eaque, possimus vitae debitis magnam neque optio, aut nesciunt sequi deserunt dolorum!
-                            Dolores provident blanditiis expedita nemo alias veritatis dolorum eum.</p>
+                        <p style="margin-left: 5px" class="mb-0">
+                            {!! $room->description !!} 
+                        </p>
                     </div>
                 </div>
                 <div class="row mt-3">
