@@ -32,21 +32,22 @@
             <!--form panels-->
             <div class="row">
                 <div class="col-12 col-lg-10 m-auto">
-                    <form class="multisteps-form__form mb-8">
+                    <form class="multisteps-form__form mb-8" action="{{ route('rooms.store') }}" method="POST" id="form">
+                        @csrf
                         <!--single form panel-->
                         <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn" style="position: absolute">
                             <h5 class="font-weight-bolder">Informasi Kamar</h5>
                             <div class="multisteps-form__content">
                                 <div class="row mt-3">
                                     <div class="col-12 col-sm-6">
-                                        <label>Nama Kamar</label>
+                                        <label>Nama Kamar <span class="text-danger">*</span></label>
                                         <input class="multisteps-form__input form-control" type="text"
-                                            placeholder="eg. Kamar 01" />
+                                            placeholder="eg. Kamar 01" name="name" required/>
                                     </div>
                                     <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                         <label>Tipe Kamar</label>
                                         <input class="multisteps-form__input form-control" type="text"
-                                            placeholder="eg. VIP" />
+                                            placeholder="eg. VIP" name="type"/>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -55,9 +56,10 @@
                                         <p class="form-text text-muted text-xs ms-1 d-inline">
                                             (optional)
                                         </p>
-                                        <div id="edit-deschiption" class="h-50">
+                                        <div id="editor-description" class="h-50">
                                             <p>Masukkan deskripsi kamar kos di sini!</p>
                                         </div>
+                                        <textarea name="description" id="description" style="display: none"></textarea>
                                     </div>
                                 </div>
                                 <div class="button-row d-flex mt-5">
@@ -92,7 +94,7 @@
                                     <div class="col-12">
                                         <label>Luas Kamar</label>
                                         <input class="multisteps-form__input form-control" type="text"
-                                            placeholder="eg. 4x5 m" />
+                                            placeholder="eg. 4x5 m" name="room_area" />
                                     </div>
                                     <div class="col-12">
                                         <label class="mt-4 form-label">Fasilitas</label>
@@ -121,25 +123,25 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <label>Harga</label>
-                                        <input class="multisteps-form__input form-control" type="text"
-                                            placeholder="300.000" />
+                                        <input class="multisteps-form__input form-control" type="number"
+                                            placeholder="300.000" name="price" required />
                                     </div>
                                     <div class="col-6">
                                         <label>Kurs Mata Kuang</label>
-                                        <select class="form-control" name="choices-sizes" id="choices-currency">
-                                            <option value="Choice 1" selected="">IDR</option>
-                                            <option value="Choice 2">EUR</option>
-                                            <option value="Choice 3">USD</option>
-                                            <option value="Choice 4">CNY</option>
-                                            <option value="Choice 5">INR</option>
-                                            <option value="Choice 6">BTC</option>
+                                        <select class="form-control" name="currency" id="choices-currency">
+                                            <option value="IDR" selected="">IDR</option>
+                                            <option value="EUR">EUR</option>
+                                            <option value="USD">USD</option>
+                                            <option value="CNY">CNY</option>
+                                            <option value="INR">INR</option>
+                                            <option value="BTC">BTC</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="button-row d-flex mt-4">
                                     <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button"
                                         title="Prev">Prev</button>
-                                    <button class="btn bg-gradient-dark ms-auto mb-0" type="button"
+                                    <button class="btn bg-gradient-dark ms-auto mb-0" type="submit"
                                         title="Send">Send</button>
                                 </div>
                             </div>
@@ -153,13 +155,14 @@
 @endsection
 
 @push('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('assets/js/plugins/multistep-form.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/dropzone.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/choices.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/quill.min.js') }}"></script>
     <script>
-        if (document.getElementById('edit-deschiption')) {
-            var quill = new Quill('#edit-deschiption', {
+        if (document.getElementById('editor-description')) {
+            var quill = new Quill('#editor-description', {
                 theme: 'snow' // Specify theme in configuration
             });
         };
@@ -171,13 +174,6 @@
             });
         };
 
-        if (document.getElementById('choices-sizes')) {
-            var element = document.getElementById('choices-sizes');
-            const example = new Choices(element, {
-                searchEnabled: false
-            });
-        };
-
         if (document.getElementById('choices-currency')) {
             var element = document.getElementById('choices-currency');
             const example = new Choices(element, {
@@ -185,5 +181,8 @@
             });
         };
 
+        $("#form").on("submit",function(){
+            $("#description").val(quill.container.firstChild.innerHTML);
+        });
     </script>
 @endpush

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Alert;
 
 class RoomController extends Controller
 {
@@ -14,7 +16,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        return view('rooms.index');
+        $rooms = Room::getData();
+        return view('rooms.index', compact('rooms'));
     }
 
     /**
@@ -35,7 +38,21 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'type' => 'max:255',
+            'room_area' => 'max:255',
+            'price' => 'required|regex:/^[0-9]+$/',
+        ]);
+
+        if ($validator->fails()) {
+            Alert::toast($validator->messages()->all()[0], 'error');
+            return redirect()->back()->withInput();
+        }
+
+        Room::store($request);
+        Alert::toast('Kamar baru berhasil ditambahkan', 'success');
+        return redirect()->route('rooms.index');
     }
 
     /**
@@ -44,9 +61,9 @@ class RoomController extends Controller
      * @param  \App\Models\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Room $room)
     {
-        return view('rooms.detail');
+        return view('rooms.detail', compact('room'));
     }
 
     /**
@@ -55,9 +72,9 @@ class RoomController extends Controller
      * @param  \App\Models\Room  $room
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Room $room)
     {
-        return view('rooms.edit');
+        return view('rooms.edit', compact('room'));
     }
 
     /**
@@ -69,7 +86,21 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'type' => 'max:255',
+            'room_area' => 'max:255',
+            'price' => 'required|regex:/^[0-9]+$/',
+        ]);
+
+        if ($validator->fails()) {
+            Alert::toast($validator->messages()->all()[0], 'error');
+            return redirect()->back()->withInput();
+        }
+
+        Room::edit($request, $room);
+        Alert::toast('Kamar berhasil diedit', 'success');
+        return redirect()->route('rooms.index');
     }
 
     /**
@@ -80,6 +111,8 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        //
+        $room->delete();
+        Alert::toast('Kamar berhasil dihapus.', 'success');
+        return redirect()->route('rooms.index');
     }
 }
