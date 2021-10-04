@@ -21,15 +21,14 @@
                 <h5>Edit Tipe Kamar</h5>
             </div>
             <div class="card-body pt-0">
-                <form action="#" method="POST">
+                <form action="{{ route('roomTypes.update', $roomType->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="row">
                         <div class="col-12">
                             <label for="name" class="form-label">Nama Tipe Kamar <span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="name" name="name" onfocus="focused(this)"
-                                    onfocusout="defocused(this)">
+                                <input type="text" class="form-control" id="name" name="name" onfocus="focused(this)" onfocusout="defocused(this)">
                             </div>
                         </div>
                     </div>
@@ -40,8 +39,7 @@
                                 (optional)
                             </p>
                             <div class="input-group">
-                                <textarea id="description" name="description" class="form-control" cols="30" rows="5"
-                                    onfocus="focused(this)" onfocusout="defocused(this)"></textarea>
+                                <textarea id="description" name="description" class="form-control" cols="30" rows="5" onfocus="focused(this)" onfocusout="defocused(this)"></textarea>
                             </div>
                         </div>
                     </div>
@@ -60,8 +58,7 @@
                         <div class="col-6">
                             <label for="price" class="form-label">Harga <span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="price" name="price"
-                                    onfocus="focused(this)" onfocusout="defocused(this)">
+                                <input type="number" class="form-control" id="price" name="price" onfocus="focused(this)" onfocusout="defocused(this)">
                             </div>
                         </div>
                         <div class="col-6">

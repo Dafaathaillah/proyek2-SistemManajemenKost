@@ -21,7 +21,7 @@
                 <h5>Tambah Tipe Baru</h5>
             </div>
             <div class="card-body pt-0">
-                <form action="#" method="POST">
+                <form action="{{ route('roomTypes.store') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-12">
