@@ -20,7 +20,7 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
-                    <table class="table align-items-center mb-0">
+                    <table class="table table-flush" id="datatable-search">
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -36,16 +36,8 @@
                         <tbody>
                         @foreach($facilities as $facility)
                             <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">{{ $facility->name }}</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="text-xs font-weight-bold mb-0">{{ $facility->description }}</p>
-                                </td>
+                                <td class="text-sm font-weight-normal">{{ $facility->name }}</td>
+                                <td class="text-sm font-weight-normal">{{ $facility->description }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('facilities.edit', $facility->id) }}" class="text-secondary font-weight-bold text-xs"
                                         data-toggle="tooltip" data-original-title="Edit user">
@@ -69,4 +61,15 @@
     </div>
 </div>
 @endsection
+
+@push('script')
+    <script src="{{ asset('assets/js/plugins/datatables.js') }}"></script>
+    <script>
+        const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+            searchable: true,
+            fixedHeight: true
+        });
+
+    </script>
+@endpush
 
