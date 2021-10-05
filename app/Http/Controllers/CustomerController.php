@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Room;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Alert;
 
 class CustomerController extends Controller
 {
@@ -14,7 +18,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('customers.index');
+        $customers = Customer::getData();
+        return view('customers.index', compact('customers'));
     }
 
     /**
@@ -24,7 +29,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('customers.create');
+        $rooms = Room::getData();
+        return view('customers.create', compact('rooms'));
     }
 
     /**
@@ -35,7 +41,31 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id_number' => 'required|max:20',
+            'name' => 'required|max:255',
+            'gender' => 'required',
+            'room_id' => 'required',
+            'phone_number' => 'max:15',
+            'whatsapp_number' => 'max:15',
+        ]);
+    
+        if ($validator->fails()) {
+            Alert::toast($validator->messages()->all()[0], 'error');
+            return redirect()->back()->withInput();
+        }
+        
+        $room_name = Room::getName($request->room_id);
+        $email = User::createEmail($room_name);
+        $password = User::createPassword();
+        $id = User::storeCustomer($request, $email, $password);
+        Customer::store($request, $id);
+        Alert::success(
+            'Customer baru berhasil ditambahkan.', 
+            'Email: <strong>' . $email . '</strong><br> Password: <strong>' . $password . '</strong>')
+            ->toHtml()->persistent('Dismiss');
+
+        return redirect()->route('customers.index');
     }
 
     /**
@@ -57,7 +87,8 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        $rooms = Room::getData();
+        return view('customers.edit', compact('customer', 'rooms'));
     }
 
     /**
@@ -69,7 +100,26 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id_number' => 'required|max:20',
+            'name' => 'required|max:255',
+            'gender' => 'required',
+            'room_id' => 'required',
+            'phone_number' => 'max:15',
+            'whatsapp_number' => 'max:15',
+            'email' => 'required',
+        ]);
+    
+        if ($validator->fails()) {
+            Alert::toast($validator->messages()->all()[0], 'error');
+            return redirect()->back()->withInput();
+        }
+
+        User::updateCustomer($request, $customer->user_id);
+        Customer::edit($request, $customer);
+        Alert::toast('Customer berhasil diupdate.', 'success')->autoClose(3000);
+            
+        return redirect()->route('customers.index');
     }
 
     /**
@@ -80,6 +130,8 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        Alert::toast('Customer berhasil dihapus.', 'success')->autoClose(3000);
+        return redirect()->route('customers.index');
     }
 }

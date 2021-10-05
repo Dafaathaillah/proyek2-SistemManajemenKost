@@ -16,40 +16,37 @@
 <div class="row">
     <div class="col-lg-12 col-12">
         <div class="card">
-            <div class="card-header">
-                <h5>Edit Customer</h5>
-            </div>
-            <div class="card-body pt-0">
-                <form action="#" method="POST">
-                    @csrf
-                    @method('PUT')
+            <form action="{{ route('customers.update', $customer->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="card-header">
+                    <h5>Edit Customer</h5>
+                </div>
+                <div class="card-body pt-0">
                     <div class="row">
                         <div class="col-6">
-                            <label for="number_id" class="form-label">No. KTP Customer</label>
-                            <input type="text" class="form-control" name="number_id" id="number_id" onfocus="focused(this)" onfocusout="defocused(this)" required>
+                            <label for="id_number" class="form-label">No. KTP Customer</label>
+                            <input type="text" class="form-control" name="id_number" id="id_number" value="{{ $customer->id_number }}" onfocus="focused(this)" onfocusout="defocused(this)" required>
                         </div>
                         <div class="col-6">
                             <label for="name" class="form-label">Nama Customer</label>
-                            <input type="text" class="form-control" name="name" id="name" onfocus="focused(this)" onfocusout="defocused(this)" required>
+                            <input type="text" class="form-control" name="name" id="name" value="{{ $customer->user->name }}" onfocus="focused(this)" onfocusout="defocused(this)" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <label for="name" class="form-label">Jenis Kelamin</label>
                             <select class="form-control" name="gender" id="choices-gender" required>
-                                <option>Jantan</option>
-                                <option>Betina</option>
+                                <option value="L" {{ $customer->gender == 'L' ? 'selected' : '' }}>Laki-Laki</option>
+                                <option value="P" {{ $customer->gender == 'P' ? 'selected' : '' }}>Perempuan</option>
                             </select>
                         </div>
                         <div class="col-6">
                             <label for="room_id" class="form-label">Pilih Kamar</label>
                             <select class="form-control" name="room_id" id="choices-room" required>
-                                <option>Kamar 1</option>
-                                <option>Kamar 2</option>
-                                <option>Kamar 3</option>
-                                <option>Kamar 4</option>
-                                <option>Kamar 5</option>
-                                <option>Kamar 6</option>
+                                @foreach ($rooms as $room)
+                                    <option value="{{ $room->id }}" {{ $customer->room_id == $room->id ? 'selected' : '' }}>{{ $room->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -60,7 +57,7 @@
                                 (optional)
                             </p>
                             <div class="input-group">
-                                <input type="number" class="form-control" name="phone_number" id="phone_number" onfocus="focused(this)" onfocusout="defocused(this)">
+                                <input type="number" class="form-control" name="phone_number" id="phone_number" value="{{ $customer->phone_number }}" onfocus="focused(this)" onfocusout="defocused(this)">
                             </div>
                         </div>
                         <div class="col-6">
@@ -69,24 +66,43 @@
                                 (optional)
                             </p>
                             <div class="input-group">
-                                <input type="number" class="form-control" name="whatsapp_number" id="whatsapp_number" onfocus="focused(this)" onfocusout="defocused(this)">
+                                <input type="number" class="form-control" name="whatsapp_number" id="whatsapp_number" value="{{ $customer->whatsapp_number }}" onfocus="focused(this)" onfocusout="defocused(this)">
                             </div>
                         </div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <label for="description" class="form-label">Alamat</label>
+                            <label for="address" class="form-label">Alamat</label>
                             <div class="input-group">
-                                <textarea id="description" name="description" class="form-control" cols="30" rows="5" onfocus="focused(this)" onfocusout="defocused(this)" required></textarea>
+                                <textarea id="address" name="address" class="form-control" cols="30" rows="5" onfocus="focused(this)" onfocusout="defocused(this)" required>{{ $customer->address }}</textarea>
                             </div>
                         </div>
-                    </div>               
-                    <div class="d-flex justify-content-end mt-4">
-                        <a href="{{ route('customers.index') }}" class="btn btn-light m-0">Cancel</a>
-                        <button type="submit" name="button" class="btn bg-gradient-primary m-0 ms-2">Submit</button>
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="card-header">
+                    <h5>Akun Customer</h5>
+                </div>
+                <div class="card-body pt-0">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" value="{{ $customer->user->email }}" onfocus="focused(this)" onfocusout="defocused(this)" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" onfocus="focused(this)" onfocusout="defocused(this)">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer pt-0">
+                    <div class="row">    
+                        <div class="d-flex justify-content-end mt-4">
+                            <a href="{{ route('customers.index') }}" class="btn btn-light m-0">Cancel</a>
+                            <button type="submit" name="button" class="btn bg-gradient-primary m-0 ms-2">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

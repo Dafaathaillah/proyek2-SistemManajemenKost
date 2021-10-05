@@ -20,12 +20,12 @@
                 <h5>Tambah Customer Baru</h5>
             </div>
             <div class="card-body pt-0">
-                <form action="#" method="POST">
+                <form action="{{ route('customers.store') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-6">
-                            <label for="number_id" class="form-label">No. KTP Customer</label>
-                            <input type="text" class="form-control" name="number_id" id="number_id" onfocus="focused(this)" onfocusout="defocused(this)" required>
+                            <label for="id_number" class="form-label">No. KTP Customer</label>
+                            <input type="text" class="form-control" name="id_number" id="id_number" onfocus="focused(this)" onfocusout="defocused(this)" required>
                         </div>
                         <div class="col-6">
                             <label for="name" class="form-label">Nama Customer</label>
@@ -34,21 +34,18 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <label for="name" class="form-label">Jenis Kelamin</label>
+                            <label for="gender" class="form-label">Jenis Kelamin</label>
                             <select class="form-control" name="gender" id="choices-gender" required>
-                                <option>Jantan</option>
-                                <option>Betina</option>
+                                <option value="L">Laki-Laki</option>
+                                <option value="P">Perempuan</option>
                             </select>
                         </div>
                         <div class="col-6">
                             <label for="room_id" class="form-label">Pilih Kamar</label>
                             <select class="form-control" name="room_id" id="choices-room" required>
-                                <option>Kamar 1</option>
-                                <option>Kamar 2</option>
-                                <option>Kamar 3</option>
-                                <option>Kamar 4</option>
-                                <option>Kamar 5</option>
-                                <option>Kamar 6</option>
+                                @foreach ($rooms as $room)
+                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -74,9 +71,9 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <label for="description" class="form-label">Alamat</label>
+                            <label for="address" class="form-label">Alamat</label>
                             <div class="input-group">
-                                <textarea id="description" name="description" class="form-control" cols="30" rows="5" onfocus="focused(this)" onfocusout="defocused(this)" required></textarea>
+                                <textarea id="address" name="address" class="form-control" cols="30" rows="5" onfocus="focused(this)" onfocusout="defocused(this)" required></textarea>
                             </div>
                         </div>
                     </div>               
