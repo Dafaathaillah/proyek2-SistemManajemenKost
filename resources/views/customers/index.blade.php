@@ -35,635 +35,80 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Rhona Davidson</td>
-                                <td class="text-sm font-weight-normal">Integration Specialist</td>
-                                <td class="text-sm font-weight-normal">$327,900</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
+                            @foreach ($customers as $customer)
+                                <tr>
+                                    <td class="text-sm font-weight-normal">{{ $customer->user->name }}</td>
+                                    <td class="text-sm font-weight-normal">{{ $customer->room->name }}</td>
+                                    <td class="text-sm font-weight-normal">
+                                        @if ($customer->phone_number == $customer->whatsapp_number)
+                                           <a href="https://wa.me/62{{ ltrim($customer->phone_number, '0') }}" target="_blank">{{ $customer->phone_number . ' (WhatsApp)' }}</a>
+                                        @else
+                                           {{ $customer->phone_number }}/<a href="https://wa.me/62{{ ltrim($customer->whatsapp_number, '0') }}" target="_blank">{{ $customer->whatsapp_number  . ' (WhatsApp)' }}</a>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Detail customer" data-bs-toggle="modal" data-bs-target="#detail{{ $customer->id }}">
+                                            <i class="fa fa-clipboard"></i>&nbsp; Detail &nbsp;
                                         </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Colleen Hurst</td>
-                                <td class="text-sm font-weight-normal">Javascript Developer</td>
-                                <td class="text-sm font-weight-normal">$205,500</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
+                                        <a href="{{ route('customers.edit', $customer->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit customer">
+                                            <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
                                         </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Sonya Frost</td>
-                                <td class="text-sm font-weight-normal">Software Engineer</td>
-                                <td class="text-sm font-weight-normal">$103,600</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Jena Gaines</td>
-                                <td class="text-sm font-weight-normal">Office Manager</td>
-                                <td class="text-sm font-weight-normal">$90,560</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Quinn Flynn</td>
-                                <td class="text-sm font-weight-normal">Support Lead</td>
-                                <td class="text-sm font-weight-normal">$342,000</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Charde Marshall</td>
-                                <td class="text-sm font-weight-normal">Regional Director</td>
-                                <td class="text-sm font-weight-normal">$470,600</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Haley Kennedy</td>
-                                <td class="text-sm font-weight-normal">Senior Marketing Designer</td>
-                                <td class="text-sm font-weight-normal">$313,500</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Tatyana Fitzpatrick</td>
-                                <td class="text-sm font-weight-normal">Regional Director</td>
-                                <td class="text-sm font-weight-normal">$385,750</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Michael Silva</td>
-                                <td class="text-sm font-weight-normal">Marketing Designer</td>
-                                <td class="text-sm font-weight-normal">$198,500</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Paul Byrd</td>
-                                <td class="text-sm font-weight-normal">Chief Financial Officer (CFO)</td>
-                                <td class="text-sm font-weight-normal">$725,000</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Gloria Little</td>
-                                <td class="text-sm font-weight-normal">Systems Administrator</td>
-                                <td class="text-sm font-weight-normal">$237,500</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Bradley Greer</td>
-                                <td class="text-sm font-weight-normal">Software Engineer</td>
-                                <td class="text-sm font-weight-normal">$132,000</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Dai Rios</td>
-                                <td class="text-sm font-weight-normal">Personnel Lead</td>
-                                <td class="text-sm font-weight-normal">$217,500</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Jenette Caldwell</td>
-                                <td class="text-sm font-weight-normal">Development Lead</td>
-                                <td class="text-sm font-weight-normal">$345,000</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Yuri Berry</td>
-                                <td class="text-sm font-weight-normal">Chief Marketing Officer (CMO)</td>
-                                <td class="text-sm font-weight-normal">$675,000</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Caesar Vance</td>
-                                <td class="text-sm font-weight-normal">Pre-Sales Support</td>
-                                <td class="text-sm font-weight-normal">$106,450</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Doris Wilder</td>
-                                <td class="text-sm font-weight-normal">Sales Assistant</td>
-                                <td class="text-sm font-weight-normal">$85,600</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Angelica Ramos</td>
-                                <td class="text-sm font-weight-normal">Chief Executive Officer (CEO)</td>
-                                <td class="text-sm font-weight-normal">$1,200,000</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Gavin Joyce</td>
-                                <td class="text-sm font-weight-normal">Developer</td>
-                                <td class="text-sm font-weight-normal">$92,575</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Jennifer Chang</td>
-                                <td class="text-sm font-weight-normal">Regional Director</td>
-                                <td class="text-sm font-weight-normal">$357,650</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Brenden Wagner</td>
-                                <td class="text-sm font-weight-normal">Software Engineer</td>
-                                <td class="text-sm font-weight-normal">$206,850</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Fiona Green</td>
-                                <td class="text-sm font-weight-normal">Chief Operating Officer (COO)</td>
-                                <td class="text-sm font-weight-normal">$850,000</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Shou Itou</td>
-                                <td class="text-sm font-weight-normal">Regional Marketing</td>
-                                <td class="text-sm font-weight-normal">$163,000</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Michelle House</td>
-                                <td class="text-sm font-weight-normal">Integration Specialist</td>
-                                <td class="text-sm font-weight-normal">$95,400</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Suki Burks</td>
-                                <td class="text-sm font-weight-normal">Developer</td>
-                                <td class="text-sm font-weight-normal">$114,500</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Prescott Bartlett</td>
-                                <td class="text-sm font-weight-normal">Technical Author</td>
-                                <td class="text-sm font-weight-normal">$145,000</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Gavin Cortez</td>
-                                <td class="text-sm font-weight-normal">Team Leader</td>
-                                <td class="text-sm font-weight-normal">$235,500</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Martena Mccray</td>
-                                <td class="text-sm font-weight-normal">Post-Sales support</td>
-                                <td class="text-sm font-weight-normal">$324,050</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Unity Butler</td>
-                                <td class="text-sm font-weight-normal">Marketing Designer</td>
-                                <td class="text-sm font-weight-normal">$85,675</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Howard Hatfield</td>
-                                <td class="text-sm font-weight-normal">Office Manager</td>
-                                <td class="text-sm font-weight-normal">$164,500</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Hope Fuentes</td>
-                                <td class="text-sm font-weight-normal">Secretary</td>
-                                <td class="text-sm font-weight-normal">$109,850</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Vivian Harrell</td>
-                                <td class="text-sm font-weight-normal">Financial Controller</td>
-                                <td class="text-sm font-weight-normal">$452,500</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Timothy Mooney</td>
-                                <td class="text-sm font-weight-normal">Office Manager</td>
-                                <td class="text-sm font-weight-normal">$136,200</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Jackson Bradshaw</td>
-                                <td class="text-sm font-weight-normal">Director</td>
-                                <td class="text-sm font-weight-normal">$645,750</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Olivia Liang</td>
-                                <td class="text-sm font-weight-normal">Support Engineer</td>
-                                <td class="text-sm font-weight-normal">$234,500</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Bruno Nash</td>
-                                <td class="text-sm font-weight-normal">Software Engineer</td>
-                                <td class="text-sm font-weight-normal">$163,500</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-sm font-weight-normal">Sakura Yamamoto</td>
-                                <td class="text-sm font-weight-normal">Support Engineer</td>
-                                <td class="text-sm font-weight-normal">$139,575</td>
-                                <td class="text-center">
-                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit tipe kamar">
-                                        <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                    </a>
-                                    <form action="#" method="post" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                            <i class="fa fa-trash"></i> Delete &nbsp;
-                                        </a>
-                                    </form>
-                                </td>
-                            </tr>
+                                        <form action="{{ route('customers.destroy', $customer->id) }}" method="post" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
+                                                <i class="fa fa-trash"></i> Delete &nbsp;
+                                            </a>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <div class="modal fade" id="detail{{ $customer->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                                    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title" id="modal-title-default">Detail Customer</h6>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <dl class="row">
+                                                    <dt class="col-sm-4">Nama Lengkap</dt>
+                                                    <dd class="col-sm-8">{{ $customer->user->name }}</dd>
+                                                  
+                                                    <dt class="col-sm-4">No. KTP</dt>
+                                                    <dd class="col-sm-8">{{ $customer->id_number }}</dd>
+                                                  
+                                                    <dt class="col-sm-4">Jenis Kelamin</dt>
+                                                    <dd class="col-sm-8">{{ $customer->gender == 'L' ? 'Laki-Laki' : 'Perempuan' }}</dd>
+                                                  
+                                                    <dt class="col-sm-4">Kamar</dt>
+                                                    <dd class="col-sm-8">{{ $customer->room->name }}</dd>
+                                                  
+                                                    <dt class="col-sm-4">Kontak</dt>
+                                                    <dd class="col-sm-8">
+                                                        @if ($customer->phone_number == $customer->whatsapp_number)
+                                                            <a href="https://wa.me/62{{ ltrim($customer->phone_number, '0') }}" target="_blank">{{ $customer->phone_number . ' (WhatsApp)' }}</a>
+                                                        @else
+                                                            {{ $customer->phone_number }} / <br> <a href="https://wa.me/62{{ ltrim($customer->whatsapp_number, '0') }}" target="_blank">{{ $customer->whatsapp_number  . ' (WhatsApp)' }}</a>
+                                                        @endif
+                                                    </dd>
+
+                                                    <dt class="col-sm-4">Alamat</dt>
+                                                    <dd class="col-sm-8">{{ $customer->address }}</dd>
+
+                                                    <dt class="col-sm-4">Email Kamar</dt>
+                                                    <dd class="col-sm-8">{{ $customer->user->email }}</dd>
+                                                </dl>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn bg-gradient-primary">Save changes</button>
+                                                <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

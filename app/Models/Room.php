@@ -24,9 +24,24 @@ class Room extends Model
         'currency',
     ];
 
+    /**
+     * Get all of the customers for the Room
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
+
     public static function getData()
     {
         return Room::all();
+    }
+
+    public static function getName($id)
+    {
+        return Room::find($id)->name;
     }
 
     public static function store(Request $request) 
