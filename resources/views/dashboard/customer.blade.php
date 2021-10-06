@@ -112,6 +112,7 @@
     </div>
     @endforeach
     @foreach($customers as $customer)
+    @if ($customer->user->id == Auth::user()->id)
     <div class="col-md-6 mt-md-0 mt-4">
         <div class="card">
             <div class="card-body p-3">
@@ -154,6 +155,7 @@
             </div>
         </div>
     </div>
+    @endif
     @endforeach
 </div>
 <div class="row mt-4">
