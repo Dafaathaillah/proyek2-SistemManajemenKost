@@ -9,6 +9,7 @@ use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\MessageController;
 
@@ -44,5 +45,5 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'customer'])->group(function () {
-    Route::view('customer/dashboard', 'dashboard.customer')->name('customer.dashboard');
+    Route::get('customer/dashboard', [DashboardController::class, 'index'])->name('customer.dashboard');
 });

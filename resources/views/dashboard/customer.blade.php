@@ -92,6 +92,7 @@
     </div>
 </div>
 <div class="row mt-4">
+    @foreach($boardinghouses as $bourdinghouse)
     <div class="col-lg-6 mb-lg-0 mb-4">
         <div class="card">
             <div class="card-body p-3">
@@ -101,21 +102,7 @@
                             <p class="mb-1 pt-2 text-bold">Bougenville Kost</p>
                             <h5 class="font-weight-bolder">Aturan</h5>
                             <ul class="mb-4">
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Consectetur adipiscing elit</li>
-                                <li>Vitae deserunt quod maiores dolorum laudantium quae voluptatibus voluptatem quas
-                                    inventore tempore.</li>
-                                <li>Facilisis in pretium nisl aliquet</li>
-                                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
-                                <li>Corporis, voluptatibus molestiae sit ipsam ullam voluptatem rerum et.</li>
-                                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque suscipit velit
-                                    molestiae quibusdam culpa.</li>
-                                <li>Vestibulum laoreet porttitor sem</li>
-                                <li>Ac tristique libero volutpat at consectetur fuga doloribus eius porro, a iure
-                                    blanditiis nam laboriosam illum, ut omnis</li>
-                                <li>Faucibus porta lacus fringilla vel</li>
-                                <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum mollitia eveniet,
-                                    blanditiis perferendis consectetur dignissimos.</li>
+                                <li> {!! $bourdinghouse->rule !!}  </li>
                             </ul>
                         </div>
                     </div>
@@ -123,6 +110,8 @@
             </div>
         </div>
     </div>
+    @endforeach
+    @foreach($customers as $customer)
     <div class="col-md-6 mt-md-0 mt-4">
         <div class="card">
             <div class="card-body p-3">
@@ -130,16 +119,17 @@
                     <div class="col-lg-12">
                         <div class="d-flex flex-column h-100">
                             <p class="mb-1 pt-2 text-bold">Informasi Kamar Anda</p>
-                            <h5 class="font-weight-bolder">Nama Kamar</h5>
+                            <h5 class="font-weight-bolder">{{ $customer->room->name }}</h5>
                             <dl class="row">
                                 <dt class="col-sm-4">Tipe Kamar</dt>
-                                <dd class="col-sm-8">Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                                <dd class="col-sm-8">{{ $customer->room->type }}</dd>
 
                                 <dt class="col-sm-4">Fasilitas</dt>
-                                <dd class="col-sm-8">Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                                <dd class="col-sm-8"> - -- -</dd>
 
                                 <dt class="col-sm-4">Harga</dt>
-                                <dd class="col-sm-8">Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                                <dd class="col-sm-8">Rp {{ number_format($customer->room->price,0,',','.') }}</dd>
+                                
                             </dl>
                             <hr class="mb-5">
                             <dl class="row">
@@ -147,10 +137,16 @@
                                 <dd class="col-sm-8">{{ Auth::user()->name }}</dd>
 
                                 <dt class="col-sm-4">Jenis Kelamin</dt>
-                                <dd class="col-sm-8">Etiam porta sem malesuada magna mollis euismod.</dd>
+                                <dd class="col-sm-8">
+                                @if($customer->gender == 'L')
+                                    <div class="col-sm-8">Laki Laki</div>
+                                @else($customer->gender == 'P')
+                                <div class="col-sm-8">Perempuan</div>
+                                @endif
+                                </dd>
 
                                 <dt class="col-sm-4">Email Akun</dt>
-                                <dd class="col-sm-8">Etiam porta sem malesuada magna mollis euismod.</dd>
+                                <dd class="col-sm-8">{{ Auth::user()->email }}</dd>
                             </dl>
                         </div>
                     </div>
@@ -158,6 +154,7 @@
             </div>
         </div>
     </div>
+    @endforeach
 </div>
 <div class="row mt-4">
     <div class="col-lg-5 mt-md-0 mt-4">
