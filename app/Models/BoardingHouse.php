@@ -36,6 +36,11 @@ class BoardingHouse extends Model
         return $this->belongsTo(Village::class, 'village_id', 'id');
     }
 
+    public static function index()
+    {
+        return BoardingHouse::all();
+    }
+
     public static function getData() 
     {
         return BoardingHouse::first();
