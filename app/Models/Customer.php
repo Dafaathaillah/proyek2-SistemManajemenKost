@@ -45,6 +45,16 @@ class Customer extends Model
         return $this->belongsTo(Room::class);
     }
 
+    /**
+     * Get all of the transactions for the Customer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function transactions()
+    {
+        return $this->hasMany(Transactions::class);
+    }
+
     public static function getData()
     {
         return Customer::all();

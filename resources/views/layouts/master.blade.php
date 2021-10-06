@@ -11,5 +11,4 @@
         @include('layouts.partials.footer')
     </div>
 </main>
-@include('layouts.partials.setting')
 @endsection

@@ -10,6 +10,8 @@ use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('roomTypes', RoomTypeController::class);
     Route::resource('rooms', RoomController::class);
     Route::resource('customers', CustomerController::class);
+    Route::resource('transactions', TransactionController::class);
+    Route::resource('messages', MessageController::class);
 });
 
 Route::middleware(['auth', 'customer'])->group(function () {
