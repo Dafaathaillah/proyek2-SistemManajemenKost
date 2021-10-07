@@ -26,8 +26,6 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     Nama</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    Deskripsi</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                     Harga</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center"
                                     style="width: 220px">
@@ -40,21 +38,21 @@
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">{{ $roomType->name }}</h6>
+                                            <h6 class="text-sm font-weight-normal">{{ $roomType->name }}</h6>
                                         </div>
                                     </div>
-                                </td>
-                                <td>
-                                    <p class="text-xs font-weight-bold mb-0">{{ $roomType->description }}</p>
                                 </td>
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">{{ $roomType->price }}</h6>
+                                            <h6 class="text-sm font-weight-normal">{{ $roomType->currency }} {{ $roomType->price }}</h6>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-center">
+                                <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Detail customer" data-bs-toggle="modal" data-bs-target="#detail{{ $roomType->id }}">
+                                            <i class="fa fa-clipboard"></i>&nbsp; Detail &nbsp;
+                                        </a>
                                     <a href="{{ route('roomTypes.edit', $roomType->id) }}" class="text-secondary font-weight-bold text-xs"
                                         data-toggle="tooltip" data-original-title="Edit user">
                                         <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
@@ -68,6 +66,37 @@
                                     </form>
                                 </td>
                             </tr>
+                            <div class="modal fade" id="detail{{ $roomType->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                                    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title" id="modal-title-default">Detail Tipe Kamar</h6>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <dl class="row">
+                                                    <dt class="col-sm-4">Nama Tipe Kamar</dt>
+                                                    <dd class="col-sm-8">{{ $roomType->name }}</dd>
+                                                  
+                                                    <dt class="col-sm-4">Deskripsi Tipe Kamar</dt>
+                                                    <dd class="col-sm-8"> {{ $roomType->description }} </dd>
+                                                  
+                                                    <dt class="col-sm-4">Fasilitas</dt>
+                                                    <dd class="col-sm-8"> -</dd>
+                                                  
+                                                    <dt class="col-sm-4">Harga</dt>
+                                                    <dd class="col-sm-8">{{ $roomType->currency }} {{ $roomType->price }}</dd>
+                                                </dl>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn bg-gradient-primary">Save changes</button>
+                                                <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                         </tbody>
                          </table>

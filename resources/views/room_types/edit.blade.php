@@ -28,29 +28,24 @@
                         <div class="col-12">
                             <label for="name" class="form-label">Nama Tipe Kamar <span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="name" name="name" onfocus="focused(this)" onfocusout="defocused(this)">
+                                <input type="text" class="form-control" id="name" name="name" onfocus="focused(this)" onfocusout="defocused(this)" value="{{ $roomType->name }}">
                             </div>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-12">
                             <label for="description" class="form-label">Deskripsi Tipe Kamar</label>
-                            <p class="form-text text-muted text-xs ms-1 d-inline">
-                                (optional)
-                            </p>
                             <div class="input-group">
-                                <textarea id="description" name="description" class="form-control" cols="30" rows="5" onfocus="focused(this)" onfocusout="defocused(this)"></textarea>
+                                <textarea id="description" name="description" class="form-control" cols="30" rows="5" onfocus="focused(this)" onfocusout="defocused(this)">{{ $roomType->description }}</textarea>
                             </div>
                         </div>
-                    </div>
                     <div class="row mt-3">
                         <div class="col-12">
                             <label class="form-label">Fasilitas <span class="text-danger">*</span></label>
                             <select class="form-control" name="choices-facility" id="choices-facility" multiple>
-                                <option value="Choice 1">Kasur</option>
-                                <option value="Choice 2">Lemari</option>
-                                <option value="Choice 3">Wifi</option>
-                                <option value="Choice 4">Listrik</option>
+                            @foreach ($facilities as $facility)
+                            <option value="{{ $facility->id }}" >{{ $facility->name }}</option>
+                            @endforeach
                             </select>
                         </div>
                     </div>
@@ -58,7 +53,7 @@
                         <div class="col-6">
                             <label for="price" class="form-label">Harga <span class="text-danger">*</span></label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="price" name="price" onfocus="focused(this)" onfocusout="defocused(this)">
+                                <input type="number" class="form-control" id="price" name="price" onfocus="focused(this)" onfocusout="defocused(this)" value="{{ $roomType->price }}">
                             </div>
                         </div>
                         <div class="col-6">
