@@ -43,7 +43,9 @@
                                     onfocus="focused(this)" onfocusout="defocused(this)"></textarea>
                             </div>
                         </div>
-                    </div>                
+                    </div>     
+                    <div class="row mt-3">
+                        <div class="col-12">         
                             <label class="form-label">Fasilitas <span class="text-danger">*</span></label>
                             <select class="form-control" name="choices-facility" id="choices-facility" multiple>
                             @foreach ($facilities as $facility)
