@@ -17,12 +17,28 @@ class Room extends Model
      */
     protected $fillable = [
         'name',
-        'type',
+        'room_type_id',
         'description',
-        'room_area',
-        'price',
-        'currency',
     ];
+
+    /**
+     * Get the roomType that owns the Room
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function roomType()
+    {
+        return $this->belongsTo(RoomType::class);
+    }
+    /**
+     * Get all of the files for the Room
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function files()
+    {
+        return $this->hasOne(File::class);
+    }
 
     /**
      * Get all of the customers for the Room
@@ -36,7 +52,7 @@ class Room extends Model
 
     public static function getData()
     {
-        return Room::all();
+        return Room::with('files')->get();
     }
 
     public static function getName($id)
@@ -46,7 +62,8 @@ class Room extends Model
 
     public static function store(Request $request) 
     {
-        Room::create($request->all());
+        $room = Room::create($request->all());
+        return $room->id;
     }
 
     public static function edit(Request $request, Room $room)

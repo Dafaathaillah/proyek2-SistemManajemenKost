@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Models\RoomType;
+use App\Models\File;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Alert;
@@ -27,7 +30,8 @@ class RoomController extends Controller
      */
     public function create()
     {
-        return view('rooms.create');
+        $types = RoomType::index();
+        return view('rooms.create', compact('types'));
     }
 
     /**
@@ -40,9 +44,7 @@ class RoomController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
-            'type' => 'max:255',
-            'room_area' => 'max:255',
-            'price' => 'required|regex:/^[0-9]+$/',
+            'room_type_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -50,7 +52,8 @@ class RoomController extends Controller
             return redirect()->back()->withInput();
         }
 
-        Room::store($request);
+        $room_id = Room::store($request);
+        File::editRoomId($room_id);
         Alert::toast('Kamar baru berhasil ditambahkan', 'success');
         return redirect()->route('rooms.index');
     }
@@ -63,7 +66,8 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
-        return view('rooms.detail', compact('room'));
+        $images = File::getImageByRoom($room->id);
+        return view('rooms.detail', compact('room', 'images'));
     }
 
     /**
@@ -74,7 +78,8 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
-        return view('rooms.edit', compact('room'));
+        $types = RoomType::index();
+        return view('rooms.edit', compact('room', 'types'));
     }
 
     /**
@@ -88,9 +93,7 @@ class RoomController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
-            'type' => 'max:255',
-            'room_area' => 'max:255',
-            'price' => 'required|regex:/^[0-9]+$/',
+            'room_type_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -111,8 +114,14 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        $room->delete();
-        Alert::toast('Kamar berhasil dihapus.', 'success');
-        return redirect()->route('rooms.index');
+        if (Customer::countCustomerByRoom($room->id) != 0) {
+            Alert::toast('Kamar masih ada yang menempati.', 'error');
+            return redirect()->back();
+        } else {
+            File::destroyByRoom($room->id);
+            $room->delete();
+            Alert::toast('Kamar berhasil dihapus.', 'success');
+            return redirect()->route('rooms.index');
+        }
     }
 }
