@@ -40,15 +40,24 @@
                                     </a>
                                 </div>
                                 <div class="card-body px-1 pb-0">
-                                    <p class="text-gradient text-dark mb-2 text-sm">{{ $room->type }}</p>
+                                    <p class="text-gradient text-dark mb-2 text-sm">{{ $room->roomType->name }}</p>
                                     <a href="javascript:;">
                                         <h5>
                                             {{ $room->name }}
                                         </h5>
                                     </a>
-                                    <p class="mb-4 text-sm">
-                                        {{ substr(strip_tags($room->description), 0, 75) . '...' }}
-                                    </p>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="mb-4 text-sm">
+                                            {{ '(' . $room->roomType->currency . ') ' . number_format($room->roomType->price,0,',','.') }}
+                                        </p>
+                                        <p class="mb-4 text-sm">
+                                            @if ($room->status == 'available')
+                                                <span class="badge badge-success text-dark">Tersedia</span>
+                                            @else
+                                                <span class="badge badge-danger text-dark">Terisi</span>
+                                            @endif
+                                        </p>
+                                    </div>
                                     <div class="d-flex align-items-center justify-content-between">
                                         <a href="{{ route('rooms.show', $room->id) }}" class="btn btn-outline-info btn-sm mb-0">Detail Kamar</a>
                                         <a href="{{ route('rooms.edit', $room->id) }}" class="btn btn-outline-dark btn-sm mb-0 px-3" title="Edit Kamar"><i class="fas fa-edit" style="font-size: 13px"></i></a>

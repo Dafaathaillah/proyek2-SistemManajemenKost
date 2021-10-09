@@ -89,7 +89,11 @@
                         <h5>Rp
                             {{ number_format($room->roomType->price,0,',','.') }}
                         </h5>
-                        <span class="badge badge-success text-dark">Tersedia</span>
+                        @if ($room->status == 'available')
+                            <span class="badge badge-success text-dark">Tersedia</span>
+                        @else
+                            <span class="badge badge-danger text-dark">Terisi</span>
+                        @endif
                         <br>
                         <label class="mt-4">Deskripsi</label>
                         <p style="margin-left: 5px" class="mb-0">
