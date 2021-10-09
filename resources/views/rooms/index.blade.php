@@ -35,8 +35,8 @@
                             <div class="card card-blog card-plain">
                                 <div class="position-relative">
                                     <a class="d-block shadow-xl border-radius-xl">
-                                        <img src="../../../assets/img/home-decor-1.jpg" alt="img-blur-shadow"
-                                            class="img-fluid shadow border-radius-xl">
+                                        <img src="{{ asset($room->files->path) }}" alt="img-blur-shadow"
+                                            class="img-fluid shadow border-radius-xl" style="height: 154px !important; width: 254px !important; object-fit: cover">
                                     </a>
                                 </div>
                                 <div class="card-body px-1 pb-0">

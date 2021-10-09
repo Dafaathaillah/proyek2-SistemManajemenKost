@@ -60,6 +60,11 @@ class Customer extends Model
         return Customer::all();
     }
 
+    public static function countCustomerByRoom($id)
+    {
+        return Customer::where('room_id', $id)->count();
+    }
+
     public static function store(Request $request, $id)
     {
         Customer::create([

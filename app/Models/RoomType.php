@@ -15,6 +15,17 @@ class RoomType extends Model
         'price',
         'currency',
     ];
+
+    /**
+     * Get all of the rooms for the RoomType
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
+    
     public static function index()
     {
         return RoomType::all();
