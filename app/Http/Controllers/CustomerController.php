@@ -29,7 +29,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $rooms = Room::getData();
+        $rooms = Room::getDataAvailableRoom();
         return view('customers.create', compact('rooms'));
     }
 
@@ -55,6 +55,7 @@ class CustomerController extends Controller
             return redirect()->back()->withInput();
         }
         
+        Room::updateStatusNotAvailable($request->room_id);
         $room_name = Room::getName($request->room_id);
         $email = User::createEmail($room_name);
         $password = User::createPassword();
@@ -87,7 +88,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        $rooms = Room::getData();
+        $rooms = Room::getDataAvailableRoom();
         return view('customers.edit', compact('customer', 'rooms'));
     }
 
@@ -115,10 +116,27 @@ class CustomerController extends Controller
             return redirect()->back()->withInput();
         }
 
+        if ($customer->room_id != $request->room_id) {
+            Room::updateStatusAvailable($customer->room_id);
+            Room::updateStatusNotAvailable($request->room_id);
+        }
+
         User::updateCustomer($request, $customer->user_id);
         Customer::edit($request, $customer);
         Alert::toast('Customer berhasil diupdate.', 'success')->autoClose(3000);
             
+        return redirect()->route('customers.index');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function updateStatus(Customer $customer)
+    {
+        Customer::updateStatus($customer);
         return redirect()->route('customers.index');
     }
 
@@ -131,6 +149,8 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
         $customer->delete();
+        Room::updateStatusAvailable($customer->room_id);
+        User::destroy($customer->user_id);
         Alert::toast('Customer berhasil dihapus.', 'success')->autoClose(3000);
         return redirect()->route('customers.index');
     }

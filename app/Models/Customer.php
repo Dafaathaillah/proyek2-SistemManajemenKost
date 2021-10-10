@@ -23,6 +23,7 @@ class Customer extends Model
         'address',
         'phone_number',
         'whatsapp_number',
+        'status',
     ];
 
     /**
@@ -88,5 +89,20 @@ class Customer extends Model
             'phone_number' => $request->phone_number,
             'whatsapp_number' => $request->whatsapp_number,
         ]);
+    }
+
+    public static function updateStatus($customer)
+    {
+        if ($customer->status == 'active') {
+            Room::updateStatusAvailable($customer->room_id);
+            $customer->update([
+                'status' => 'inactive',
+            ]);
+        } else {
+            Room::updateStatusNotAvailable($customer->room_id);
+            $customer->update([
+                'status' => 'active',
+            ]);
+        }
     }
 }

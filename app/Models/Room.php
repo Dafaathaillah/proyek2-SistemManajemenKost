@@ -55,6 +55,11 @@ class Room extends Model
         return Room::with('files')->get();
     }
 
+    public static function getDataAvailableRoom()
+    {
+        return Room::where('status', 'available')->get();
+    }
+
     public static function getName($id)
     {
         return Room::find($id)->name;
@@ -69,5 +74,19 @@ class Room extends Model
     public static function edit(Request $request, Room $room)
     {
         $room->update($request->all());
+    }
+
+    public static function updateStatusNotAvailable($id)
+    {
+        Room::where('id', $id)->update([
+            'status' => 'not available',
+        ]);
+    }
+
+    public static function updateStatusAvailable($id)
+    {
+        Room::where('id', $id)->update([
+            'status' => 'available',
+        ]);
     }
 }

@@ -33,7 +33,7 @@
                             <input type="text" class="form-control" name="name" id="name" value="{{ $customer->user->name }}" onfocus="focused(this)" onfocusout="defocused(this)" required>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mt-3">
                         <div class="col-6">
                             <label for="name" class="form-label">Jenis Kelamin</label>
                             <select class="form-control" name="gender" id="choices-gender" required>
@@ -44,13 +44,14 @@
                         <div class="col-6">
                             <label for="room_id" class="form-label">Pilih Kamar</label>
                             <select class="form-control" name="room_id" id="choices-room" required>
+                                <option value="{{ $customer->room_id }}" selected>{{ $customer->room->name }}</option>
                                 @foreach ($rooms as $room)
-                                    <option value="{{ $room->id }}" {{ $customer->room_id == $room->id ? 'selected' : '' }}>{{ $room->name }}</option>
+                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="row mt-4">
+                    <div class="row mt-3">
                         <div class="col-6">
                             <label for="description" class="form-label">No. Telp</label>
                             <p class="form-text text-muted text-xs ms-1 d-inline">
@@ -70,7 +71,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-4">
+                    <div class="row mt-3">
                         <div class="col-12">
                             <label for="address" class="form-label">Alamat</label>
                             <div class="input-group">
@@ -115,6 +116,7 @@
             var tags = document.getElementById('choices-room');
             const examples = new Choices(tags, {
                 searchEnabled: true,
+                searchPlaceholderValue: 'Search...',
                 shouldSort: false,
             });
         };
