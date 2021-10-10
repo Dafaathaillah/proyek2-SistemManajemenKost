@@ -43,6 +43,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('files', [FileController::class, 'store'])->name('file.store');
     Route::post('files/remove', [FileController::class, 'removeFile'])->name('file.remove');
     Route::resource('customers', CustomerController::class);
+    Route::get('customers/{customer}/updateStatus', [CustomerController::class, 'updateStatus'])->name('customers.updateStatus');
     Route::resource('transactions', TransactionController::class);
     Route::resource('messages', MessageController::class);
 });

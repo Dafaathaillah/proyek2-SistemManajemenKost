@@ -96,4 +96,9 @@ class User extends Authenticatable
         $user->name = $request->name;
         $user->save();
     }
+
+    public static function destroy($id)
+    {
+        User::where('id', $id)->delete();
+    }
 }

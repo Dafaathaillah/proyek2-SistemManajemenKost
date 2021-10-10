@@ -29,6 +29,7 @@
                                     Kamar</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                     No. Telp/WhatsApp</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center"
                                     style="width: 220px">
                                     Actions</th>
@@ -44,6 +45,13 @@
                                            <a href="https://wa.me/62{{ ltrim($customer->phone_number, '0') }}" target="_blank">{{ $customer->phone_number . ' (WhatsApp)' }}</a>
                                         @else
                                            {{ $customer->phone_number }}/<a href="https://wa.me/62{{ ltrim($customer->whatsapp_number, '0') }}" target="_blank">{{ $customer->whatsapp_number  . ' (WhatsApp)' }}</a>
+                                        @endif
+                                    </td>
+                                    <td class="text-sm font-weight-normal">
+                                        @if ($customer->status == 'active')
+                                            <a href="{{ route('customers.updateStatus', $customer->id) }}" title="Klik untuk mengubah status customer"><span class="badge badge-success text-dark">Active</span></a>
+                                        @else
+                                            <a href="{{ route('customers.updateStatus', $customer->id) }}" title="Klik untuk mengubah status customer"><span class="badge badge-danger text-dark">Inactive</span></a>
                                         @endif
                                     </td>
                                     <td class="text-center">
@@ -102,7 +110,6 @@
                                                 </dl>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn bg-gradient-primary">Save changes</button>
                                                 <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
                                             </div>
                                         </div>
