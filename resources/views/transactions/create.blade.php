@@ -21,18 +21,28 @@
                 <h5>Pembayaran Baru</h5>
             </div>
             <div class="card-body pt-0">
-                <form action="{{ route('transactions.store') }}" method="POST">
+                <form action="{{ route('transactions.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col-12">
-                            <label for="name" class="form-label">Nama Customer</label>
-                            <select class="form-control" name="customer_id" id="choices-customer">
-                                <option selected disabled>Pilih Customer</option>
-                                @foreach ($customers as $customer)
-                                    <option value="{{ $customer->id }}">{{ $customer->user->name . ' - ' . $customer->room->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        @if (Auth::user()->role == 'admin')
+                            <div class="col-12">
+                                <label for="name" class="form-label">Nama Customer</label>
+                                <select class="form-control" name="customer_id" id="choices-customer">
+                                    <option selected disabled>Pilih Customer</option>
+                                    @foreach ($customers as $customer)
+                                        <option value="{{ $customer->id }}">{{ $customer->user->name . ' - ' . $customer->room->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @else
+                            <div class="col-12">
+                                <label for="name" class="form-label">Nama Customer</label>
+                                <select class="form-control" name="customer_id" id="choices-customer" disabled>
+                                    <option value="{{ $customer->id }}" selected>{{ $customer->user->name . ' - ' . $customer->room->name }}</option>
+                                </select>
+                                <input type="hidden" name="customer_id" value="{{ $customer->id }}">
+                            </div>
+                        @endif
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
@@ -61,6 +71,16 @@
                             </div>
                         </div>
                     </div>
+                    @if (Auth::user()->role == 'customer')
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <label for="evidence" class="form-label">Bukti Transfer</label>
+                                <div class="input-group">
+                                    <input type="file" class="form-control" id="evidence" name="evidence" onfocus="focused(this)" onfocusout="defocused(this)">
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                     <div class="row mt-4">
                         <div class="col-12">
                             <label for="description" class="form-label">Keterangan</label>
@@ -71,7 +91,7 @@
                                 <textarea id="description" name="description" class="form-control" cols="30" rows="5" onfocus="focused(this)" onfocusout="defocused(this)"></textarea>
                             </div>
                         </div>
-                    </div>               
+                    </div>
                     <div class="d-flex justify-content-end mt-4">
                         <a href="{{ route('transactions.index') }}" class="btn btn-light m-0">Cancel</a>
                         <button type="submit" class="btn bg-gradient-primary m-0 ms-2">Submit</button>
