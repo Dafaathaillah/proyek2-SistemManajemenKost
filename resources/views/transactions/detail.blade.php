@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-                <hr class="horizontal dark mt-0 mb-4">
+                <hr class="horizontal dark mt-2 mb-4">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-12">
                         <h6 class="mb-3">Bulan yang dibayar</h6>
@@ -72,17 +72,24 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                         <h6 class="mb-3">Metode Pembayaran</h6>
-                        <div
-                            class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                            <img class="w-10 me-3 mb-0" src="{{ asset('assets/img/logos/money.png') }}" alt="logo">
-                            <h6 class="mb-0">CASH</h6>
-                            {{-- <button type="button"
-                                class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center ms-auto"
-                                data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
-                                data-bs-original-title="We do not store card details">
-                                <i class="fas fa-info" aria-hidden="true"></i>
-                            </button> --}}
-                        </div>
+                        @if ($transaction->payment_method == 'cash')
+                            <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+                                <img class="w-10 me-3 mb-0" src="{{ asset('assets/img/logos/money.png') }}" alt="logo">
+                                <h6 class="mb-0">CASH</h6>
+                            </div>
+                        @else
+                            <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+                                <img class="w-10 me-3 mb-0" src="{{ asset('assets/img/logos/mastercard.png') }}" alt="logo">
+                                <h6 class="mb-0">TRANSFER</h6>
+                                <button type="button"
+                                    class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center ms-auto"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
+                                    data-bs-original-title="We do not store card details">
+                                    <i class="fas fa-info" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <h6 class="mb-3 mt-3"><a href="{{ asset('storage/' . $transaction->evidence) }}">Bukti Pembayaran</a></h6>
+                        @endif
                     </div>
                     <div class="col-lg-5 col-md-6 col-12">
                         <h6 class="mb-3">Deskripsi</h6>
@@ -95,7 +102,7 @@
                         </ul>
                     </div>
                 </div>
-                <hr class="horizontal dark mt-0 mb-4">
+                <hr class="horizontal dark mt-2 mb-4">
                 <div class="row">
                     <div class="col-lg-6 col-12 ms-auto">
                         <h6 class="mb-3">Ringkasan</h6>

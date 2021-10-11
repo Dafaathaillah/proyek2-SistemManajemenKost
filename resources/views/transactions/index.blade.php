@@ -96,10 +96,12 @@
                                         data-toggle="tooltip" data-original-title="Detail transaksi">
                                         <i class="fa fa-clipboard"></i> Detail
                                     </a> &nbsp;
-                                    <a href="{{ route('transactions.edit', $transaction->id) }}" class="text-secondary font-weight-bold text-xs"
-                                        data-toggle="tooltip" data-original-title="Edit transaksi">
-                                        <i class="fa fa-edit"></i> Edit
-                                    </a>
+                                    @if (Auth::user()->role == 'admin' || (Auth::user()->role == 'customer' && $transaction->status == 'pending'))
+                                        <a href="{{ route('transactions.edit', $transaction->id) }}" class="text-secondary font-weight-bold text-xs"
+                                            data-toggle="tooltip" data-original-title="Edit transaksi">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
