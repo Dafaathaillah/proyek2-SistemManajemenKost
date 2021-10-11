@@ -61,6 +61,11 @@ class Customer extends Model
         return Customer::all();
     }
 
+    public static function getDataActiveCustomer()
+    {
+        return Customer::where('status', 'active')->get();
+    }
+
     public static function countCustomerByRoom($id)
     {
         return Customer::where('room_id', $id)->count();
