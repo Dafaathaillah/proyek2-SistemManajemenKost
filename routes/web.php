@@ -45,6 +45,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('customers', CustomerController::class);
     Route::get('customers/{customer}/updateStatus', [CustomerController::class, 'updateStatus'])->name('customers.updateStatus');
     Route::resource('transactions', TransactionController::class);
+    Route::view('invoices', 'transactions.invoice');
     Route::resource('messages', MessageController::class);
 });
 

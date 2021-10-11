@@ -5,9 +5,11 @@
     <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
         <li class="breadcrumb-item text-sm text-dark"><a class="opacity-5 text-dark" href="javascript:;">Dashboard</a>
         </li>
-        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Manajemen Kamar</li>
+        <li class="breadcrumb-item text-sm text-dark"><a class="opacity-5 text-dark" href="javascript:;">Pembayaran</a>
+        </li>
+        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Pembayaran Baru</li>
     </ol>
-    <h6 class="font-weight-bolder mb-0">Transaksi</h6>
+    <h6 class="font-weight-bolder mb-0">Pembayaran Baru</h6>
 </nav>
 @endsection
 
@@ -19,7 +21,7 @@
                 <h5>Pembayaran Baru</h5>
             </div>
             <div class="card-body pt-0">
-                <form action="#" method="POST">
+                <form action="{{ route('transactions.store') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-12">
@@ -34,8 +36,8 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-12">
-                            <label for="description" class="form-label">Bulan</label>
-                            <select class="form-control" name="month" id="choices-month" multiple>
+                            <label for="month" class="form-label">Bulan</label>
+                            <select class="form-control" name="month[]" id="choices-month" multiple>
                                 <option>Januari 2021</option>
                                 <option>Februari 2021</option>
                                 <option>Maret 2021</option>
@@ -71,7 +73,8 @@
                         </div>
                     </div>               
                     <div class="d-flex justify-content-end mt-4">
-                        <button type="submit" name="button" class="btn bg-gradient-primary m-0 ms-2">Submit</button>
+                        <a href="{{ route('transactions.index') }}" class="btn btn-light m-0">Cancel</a>
+                        <button type="submit" class="btn bg-gradient-primary m-0 ms-2">Submit</button>
                     </div>
                 </form>
             </div>
