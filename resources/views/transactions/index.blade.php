@@ -70,9 +70,9 @@
                                             </button>
                                             <span>Sukses</span>
                                         @else
-                                            <button class="btn btn-icon-only btn-rounded btn-outline-warning mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
+                                            <a href="{{ route('transactions.updateStatus', $transaction->id) }}" class="btn btn-icon-only btn-rounded btn-outline-warning mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
                                                 <i class="fas fa-exclamation" aria-hidden="true"></i>
-                                            </button>
+                                            </a>
                                             <span>Pending</span>
                                         @endif
                                     </div>

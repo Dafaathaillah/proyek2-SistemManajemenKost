@@ -97,6 +97,13 @@ class TransactionController extends Controller
         return view('transactions.edit', compact('transaction', 'customers', 'customer', 'details'));
     }
 
+    public function updateStatus(Transaction $transaction)
+    {
+        Transaction::updateStatus($transaction);
+        Alert::toast('Status transaksi berhasil diperbarui.', 'success');
+        return redirect()->route('transactions.index');
+    }
+
     /**
      * Update the specified resource in storage.
      *
