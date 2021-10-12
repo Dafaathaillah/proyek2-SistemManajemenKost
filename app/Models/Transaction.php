@@ -119,4 +119,11 @@ class Transaction extends Model
             }
         }
     }
+
+    public static function updateStatus(Transaction $transaction)
+    {
+        $transaction->update([
+            'status' => 'accept',
+        ]);
+    }
 }

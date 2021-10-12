@@ -44,6 +44,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('files/remove', [FileController::class, 'removeFile'])->name('file.remove');
     Route::resource('customers', CustomerController::class);
     Route::get('customers/{customer}/updateStatus', [CustomerController::class, 'updateStatus'])->name('customers.updateStatus');
+    Route::get('transactions/{transaction}/updateStatus', [TransactionController::class, 'updateStatus'])->name('transactions.updateStatus');
     Route::view('invoices', 'transactions.invoice');
     Route::resource('messages', MessageController::class);
 });
