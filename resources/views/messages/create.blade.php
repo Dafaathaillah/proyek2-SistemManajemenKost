@@ -21,7 +21,7 @@
                 <h5>Pesan Baru</h5>
             </div>
             <div class="card-body pt-0">
-                <form action="{{ route('messages.store') }}" method="POST" id="form">
+                <form action="{{ route('messages.store') }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-12">
@@ -35,10 +35,9 @@
                     <div class="row mb-4">
                         <div class="col-12">
                             <label for="message" class="form-label">Isi Pesan</label>
-                            <div id="editor" class="h-50">
-                                <p>Masukkan pesan Anda di sini.</p>
+                            <div class="input-group">
+                                <textarea id="message" name="message" class="form-control" cols="30" rows="5" onfocus="focused(this)" onfocusout="defocused(this)"></textarea>
                             </div>
-                            <textarea name="message" style="display:none" id="message"></textarea>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end mt-4">
@@ -54,14 +53,8 @@
 
 @push('script')
     <script src="{{ asset('assets/js/plugins/choices.min.js') }}"></script>
-    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        var quill = new Quill('#editor', {
-            theme: 'snow',
-        });
-
         if (document.getElementById('choices-customer')) {
             var tags = document.getElementById('choices-customer');
             const examples = new Choices(tags, {
@@ -70,9 +63,5 @@
                 shouldSort: false,
             });
         };
-
-        $("#form").on("submit",function(){
-            $("#message").val(quill.container.firstChild.innerHTML);
-        })
     </script>
 @endpush
