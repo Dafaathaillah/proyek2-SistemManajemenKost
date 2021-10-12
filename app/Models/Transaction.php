@@ -58,6 +58,7 @@ class Transaction extends Model
     public static function indexLimit()
     {
         return Transaction::orderByDesc('created_at')->limit(5)->get();
+    }
 
     public static function getDataByCustomerDesc($customer_id)
     {
