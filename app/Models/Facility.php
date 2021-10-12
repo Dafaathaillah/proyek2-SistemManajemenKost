@@ -15,6 +15,16 @@ class Facility extends Model
         'description',
     ];
 
+    /**
+     * The roomType that belong to the Facility
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roomType()
+    {
+        return $this->belongsToMany(RoomType::class, 'facility_room_types', 'facility_id', 'room_type_id');
+    }
+
     public static function index()
     {
         return Facility::all();
