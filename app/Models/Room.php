@@ -78,9 +78,13 @@ class Room extends Model
 
     public static function updateStatusNotAvailable($id)
     {
-        Room::where('id', $id)->update([
-            'status' => 'not available',
-        ]);
+        $count = Customer::countCustomerActiveByRoom($id);
+        $room = Room::find($id);
+        if ((strpos($room->roomType->name, 'double') && $count >= 1) || strpos($room->roomType->name, 'single')) {
+            Room::where('id', $id)->update([
+                'status' => 'not available',
+            ]);
+        }
     }
 
     public static function updateStatusAvailable($id)
