@@ -32,7 +32,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::view('admin/dashboard', 'dashboard.admin')->name('admin.dashboard');
+    Route::get('admin/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
     Route::resource('boardingHouses', BoardingHouseController::class);
     Route::get('regencies/{id}', [RegencyController::class, 'index']);
     Route::get('districts/{id}', [DistrictController::class, 'index']);
