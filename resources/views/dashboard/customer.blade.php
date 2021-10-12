@@ -123,7 +123,7 @@
                             <h5 class="font-weight-bolder">{{ $customer->room->name }}</h5>
                             <dl class="row">
                                 <dt class="col-sm-4">Tipe Kamar</dt>
-                                <dd class="col-sm-8">{{ $customer->room->type }}</dd>
+                                <dd class="col-sm-8">{{ $customer->room->roomtype->name }}</dd>
 
                                 <dt class="col-sm-4">Fasilitas</dt>
                                 <dd class="col-sm-8"> - -- -</dd>
