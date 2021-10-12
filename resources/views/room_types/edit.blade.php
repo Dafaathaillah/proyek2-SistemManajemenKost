@@ -42,10 +42,10 @@
                     <div class="row mt-3">
                         <div class="col-12">
                             <label class="form-label">Fasilitas <span class="text-danger">*</span></label>
-                            <select class="form-control" name="choices-facility" id="choices-facility" multiple>
-                            @foreach ($facilities as $facility)
-                            <option value="{{ $facility->id }}" >{{ $facility->name }}</option>
-                            @endforeach
+                            <select class="form-control" name="facility_id[]" id="choices-facility" multiple>
+                                @foreach ($facilities as $facility)
+                                    <option value="{{ $facility->id }}" {{ $facility_roomTypes->contains('facility_id', $facility->id) ? 'selected' : '' }}>{{ $facility->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

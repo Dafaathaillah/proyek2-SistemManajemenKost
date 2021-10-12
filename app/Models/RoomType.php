@@ -25,15 +25,31 @@ class RoomType extends Model
     {
         return $this->hasMany(Room::class);
     }
+
+    /**
+     * The facility that belong to the RoomType
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function facility()
+    {
+        return $this->belongsToMany(Facility::class, 'facility_room_types', 'room_type_id', 'facility_id');
+    }
     
     public static function index()
     {
-        return RoomType::all();
+        return RoomType::with('facility')->get();
     }
 
     public static function store(Request $request)
     {
-        RoomType::create($request->all());
+        $roomType = RoomType::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'currency' => $request->currency,
+        ]);
+        return $roomType->id;
     }
 
     public static function edit(Request $request, RoomType $roomType)
