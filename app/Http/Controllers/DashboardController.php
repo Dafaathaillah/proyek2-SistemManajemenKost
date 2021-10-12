@@ -8,6 +8,7 @@ use App\Models\Facility;
 use App\Models\BoardingHouse;
 use App\Models\Room;
 use App\Models\Transaction;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -28,13 +29,13 @@ class DashboardController extends Controller
 
     public function indexAdmin()
     {
-
         $rooms = Room::count();
         $roomsavailable = Room::where('status', '=', 'available')->count();
         $customers = Customer::where('status', '=', 'active')->count();
         $facilities = Facility::count();
         $transactions = Transaction::indexLimit();
-        return view('dashboard.admin', compact('rooms','facilities', 'transactions', 'roomsavailable', 'customers'));
+        $messages = Message::getDataDescLimit();
+        return view('dashboard.admin', compact('rooms','facilities', 'transactions', 'roomsavailable', 'customers', 'messages'));
         
     }
 

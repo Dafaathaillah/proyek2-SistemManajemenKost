@@ -10,7 +10,7 @@
                         <div class="numbers">
                             <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Kamar</p>
                             <h5 class="font-weight-bolder mb-0">
-                                {{$rooms}}
+                                {{ $rooms }}
                                 <span class="text-dark text-sm font-weight-bolder">kamar</span>
                             </h5>
                         </div>
@@ -32,7 +32,7 @@
                         <div class="numbers">
                             <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Penyewa</p>
                             <h5 class="font-weight-bolder mb-0">
-                            {{$customers}}
+                                {{ $customers }}
                                 <span class="text-dark text-sm font-weight-bolder">orang</span>
                             </h5>
                         </div>
@@ -54,7 +54,7 @@
                         <div class="numbers">
                             <p class="text-sm mb-0 text-capitalize font-weight-bold">Kamar Tersedia</p>
                             <h5 class="font-weight-bolder mb-0">
-                            {{$roomsavailable}}
+                                {{ $roomsavailable }}
                                 <span class="text-dark text-sm font-weight-bolder">kamar</span>
                             </h5>
                         </div>
@@ -76,7 +76,7 @@
                         <div class="numbers">
                             <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Fasilitas</p>
                             <h5 class="font-weight-bolder mb-0">
-                            {{$facilities}}
+                                {{ $facilities }}
                                 <span class="text-dark text-sm font-weight-bolder">jenis</span>
                             </h5>
                         </div>
@@ -86,37 +86,6 @@
                             <i class="fas fa-hand-holding-heart text-lg opacity-10" aria-hidden="true"></i>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row mt-4">
-    <div class="col-lg-5 mb-lg-0 mb-4">
-        <div class="card z-index-2">
-            <div class="card-body p-3">
-                <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">
-                    <div class="chart">
-                        <canvas id="chart-bars" class="chart-canvas" height="275"></canvas>
-                    </div>
-                </div>
-                <h6 class="ms-2 mt-4 mb-0"> Statistik Penyewa </h6>
-                <p class="text-sm ms-2"> (<span class="font-weight-bolder">+23%</span>) than last week </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-7">
-        <div class="card z-index-2">
-            <div class="card-header pb-0">
-                <h6>Statitik Keuangan</h6>
-                <p class="text-sm">
-                    <i class="fa fa-arrow-up text-success"></i>
-                    <span class="font-weight-bold">4% more</span> in 2021
-                </p>
-            </div>
-            <div class="card-body p-3">
-                <div class="chart">
-                    <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
                 </div>
             </div>
         </div>
@@ -153,7 +122,7 @@
             </div>
             <div class="card-body px-0 pb-2">
                 <div class="table-responsive">
-                    <table class="table align-items-center" >
+                    <table class="table align-items-center">
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -168,107 +137,67 @@
                                     Status</th>
                             </tr>
                         </thead>
-                        <tbody> 
-                        @foreach($transactions as $transaction)
-                            <tr>
-                                <td class="table align-items-center mb-0">
-                                    <div class=" px-2 py-1">
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">{{ $transaction->customer->user->name}}</h6>
+                        <tbody>
+                            @foreach($transactions as $transaction)
+                                <tr>
+                                    <td class="table align-items-center mb-0">
+                                        <div class=" px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ $transaction->customer->user->name }}
+                                                </h6>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">{{ $transaction->created_at }}</h6>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">{{ $transaction->customer->room->name}}</h6>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                @if ($transaction->status == 'accept')
-                                    <span class="badge badge-success text-dark"> Sukses</span>
-                                @else
-                                    <span class="badge badge-danger text-dark">Pending</span>
-                                @endif
-                                </td>
-                            </tr>
-                        @endforeach
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">{{ $transaction->created_at }}</h6>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">{{ $transaction->customer->room->name }}</h6>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        @if($transaction->status == 'accept')
+                                            <span class="badge badge-success text-dark"> Sukses</span>
+                                        @else
+                                            <span class="badge badge-danger text-dark">Pending</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-4 col-md-6">
+    <div class="col-12 col-xl-4 mt-xl-0 mt-4">
         <div class="card h-100">
-            <div class="card-header pb-0">
-                <h6>Pesan Terbaru</h6>
-                <p class="text-sm">
-                    <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
-                    <span class="font-weight-bold">24%</span> this month
-                </p>
+            <div class="card-header pb-0 p-3">
+                <h6 class="mb-0">Pesan Terbaru</h6>
             </div>
-            <div class="card-body p-3">
-                <div class="timeline timeline-one-side">
-                    <div class="timeline-block mb-3">
-                        <span class="timeline-step">
-                            <i class="ni ni-bell-55 text-success text-gradient"></i>
-                        </span>
-                        <div class="timeline-content">
-                            <h6 class="text-dark text-sm font-weight-bold mb-0">$2400, Design changes</h6>
-                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
-                        </div>
-                    </div>
-                    <div class="timeline-block mb-3">
-                        <span class="timeline-step">
-                            <i class="ni ni-html5 text-danger text-gradient"></i>
-                        </span>
-                        <div class="timeline-content">
-                            <h6 class="text-dark text-sm font-weight-bold mb-0">New order #1832412</h6>
-                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 11 PM</p>
-                        </div>
-                    </div>
-                    <div class="timeline-block mb-3">
-                        <span class="timeline-step">
-                            <i class="ni ni-cart text-info text-gradient"></i>
-                        </span>
-                        <div class="timeline-content">
-                            <h6 class="text-dark text-sm font-weight-bold mb-0">Server payments for April</h6>
-                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 9:34 PM</p>
-                        </div>
-                    </div>
-                    <div class="timeline-block mb-3">
-                        <span class="timeline-step">
-                            <i class="ni ni-credit-card text-warning text-gradient"></i>
-                        </span>
-                        <div class="timeline-content">
-                            <h6 class="text-dark text-sm font-weight-bold mb-0">New card added for order #4395133</h6>
-                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">20 DEC 2:20 AM</p>
-                        </div>
-                    </div>
-                    <div class="timeline-block mb-3">
-                        <span class="timeline-step">
-                            <i class="ni ni-key-25 text-primary text-gradient"></i>
-                        </span>
-                        <div class="timeline-content">
-                            <h6 class="text-dark text-sm font-weight-bold mb-0">Unlock packages for development</h6>
-                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">18 DEC 4:54 AM</p>
-                        </div>
-                    </div>
-                    <div class="timeline-block">
-                        <span class="timeline-step">
-                            <i class="ni ni-money-coins text-dark text-gradient"></i>
-                        </span>
-                        <div class="timeline-content">
-                            <h6 class="text-dark text-sm font-weight-bold mb-0">New order #9583120</h6>
-                            <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">17 DEC</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-body p-3 w-auto h-auto max-height-vh-100 h-100 overflow-auto">
+                <ul class="list-group">
+                    @foreach ($messages as $message)
+                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                            <div class="avatar me-3">
+                                <img src="../../../assets/img/kal-visuals-square.jpg" alt="kal"
+                                    class="border-radius-lg shadow">
+                            </div>
+                            <div class="d-flex align-items-start flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm">{{ $message->customer->user->name }}</h6>
+                                <p class="mb-0 text-xs">{!! Str::limit($message->message, $limit = 20, $end = '...') !!}</p>
+                            </div>
+                            @if($message->status == 'accept')
+                                <a href="#" class="pe-3 ps-0 mb-0 ms-auto"><span class="badge badge-success text-dark"> Sukses</span></a>
+                            @else
+                                <a href="{{ route('messages.updateStatus', $message->id) }}" class="pe-3 ps-0 mb-0 ms-auto"><span class="badge badge-danger text-dark">Pending</span></a>
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>

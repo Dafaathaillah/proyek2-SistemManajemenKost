@@ -32,6 +32,11 @@ class Message extends Model
         return Message::orderByDesc('created_at')->get();
     }
 
+    public static function getDataDescLimit()
+    {
+        return Message::orderByDesc('created_at')->limit(5)->get();
+    }
+
     public static function getDataByCustomerDesc($customer_id)
     {
         return Message::where('customer_id', $customer_id)->orderByDesc('created_at')->get();
