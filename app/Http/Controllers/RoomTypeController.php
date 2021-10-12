@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RoomType;
+use App\Models\Facility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Alert;
@@ -11,12 +12,14 @@ class RoomTypeController extends Controller
 {
     public function index()
     {
-        return view('room_types.index', ['roomTypes' => RoomType::index()]);
+        $roomType = RoomType::all();
+        return view('room_types.index', ['roomTypes' => RoomType::index()], compact('roomType'));
     }
 
     public function create()
     {
-        return view('room_types.create');
+        $facilities = Facility::all();
+        return view('room_types.create', compact('facilities'));
     }
 
     public function store(Request $request)
@@ -40,15 +43,16 @@ class RoomTypeController extends Controller
     }
 
     public function edit(RoomType $roomType)
-    {
-        return view('room_types.edit', ['roomType' => $roomType]);
+    {   
+        $facilities = Facility::all();
+        return view('room_types.edit', ['roomType' => $roomType], compact('facilities'));
     }
 
     public function update(Request $request, RoomType $roomType)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
-            'price' => 'required|regex:/^[0-9]+$/'
+            'price' => 'required|regex:/^[0-9]+$/',
         ]);
     
         if ($validator->fails()) {

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Alert;
+use Auth;
 
 class TransactionController extends Controller
 {
@@ -15,7 +19,13 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::user()->role == 'admin') {
+            $transactions = Transaction::getDataDesc();
+        } else {
+            $customer = Customer::select('id')->where('user_id', Auth::user()->id)->first();
+            $transactions = Transaction::getDataByCustomerDesc($customer->id);
+        }
+        return view('transactions.index', compact('transactions'));
     }
 
     /**
@@ -25,8 +35,9 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        $customers = Customer::getData();
-        return view('transactions.create', compact('customers'));
+        $customers = Customer::getDataActiveCustomer();
+        $customer = Customer::where('user_id', Auth::user()->id)->first();
+        return view('transactions.create', compact('customers', 'customer'));
     }
 
     /**
@@ -37,7 +48,27 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'customer_id' => 'required',
+            'month' => 'required',
+            'total' => 'required',
+        ]);
+
+        if (Auth::user()->role == 'customer') {
+            $validator = Validator::make($request->all(), [
+                'evidence' => 'required',
+            ]);
+        }
+    
+        if ($validator->fails()) {
+            Alert::toast($validator->messages()->all()[0], 'error');
+            return redirect()->back()->withInput();
+        }
+
+        $id = Transaction::store($request);
+        TransactionDetail::store($request, $id);
+        Alert::toast('Transaksi baru berhasil dibuat.', 'success');
+        return redirect()->route('transactions.index');
     }
 
     /**
@@ -48,7 +79,8 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        $countMonth = TransactionDetail::countByTransaction($transaction->id);
+        return view('transactions.detail', compact('transaction', 'countMonth'));
     }
 
     /**
@@ -59,7 +91,10 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        $customers = Customer::getDataActiveCustomer();
+        $customer = Customer::where('user_id', Auth::user()->id)->first();
+        $details = TransactionDetail::where('transaction_id', $transaction->id)->get();
+        return view('transactions.edit', compact('transaction', 'customers', 'customer', 'details'));
     }
 
     /**
@@ -71,7 +106,21 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'customer_id' => 'required',
+            'month' => 'required',
+            'total' => 'required',
+        ]);
+    
+        if ($validator->fails()) {
+            Alert::toast($validator->messages()->all()[0], 'error');
+            return redirect()->back()->withInput();
+        }
+        Transaction::edit($request, $transaction);
+        TransactionDetail::destroyByTransaction($transaction->id);
+        TransactionDetail::store($request, $transaction->id);
+        Alert::toast('Transaksi berhasil diperbarui.', 'success');
+        return redirect()->route('transactions.index');
     }
 
     /**
