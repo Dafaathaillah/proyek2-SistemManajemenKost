@@ -7,11 +7,9 @@
                 <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                     <div class="card card-plain mt-4">
                         <div class="card-header pb-0 text-left bg-transparent">
-                            <h3 class="font-weight-bolder text-info text-gradient">{{ __('Welcome back') }}</h3>
-                            <p class="mb-0">{{ __('Create a new acount')}}<br></p>
-                            <p class="mb-0">{{__('OR Sign in with these credentials:') }}</p>
-                            <p class="mb-0">{{ __('Email ') }}<b>{{ __('admin@starter.com') }}</b></p>
-                            <p class="mb-0">{{ __('Password ') }}<b>{{ __('secret123') }}</b></p>
+                            <h3 class="font-weight-bolder text-info text-gradient">Selamat Datang</h3>
+                            <p class="mb-0">Silahkan login.<br></p>
+                            <p class="mb-0">Belum memiliki akun? Hubungi admin.<br></p>
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ route('login') }}" method="POST" role="form text-left">
@@ -45,22 +43,22 @@
                         </div>
                         <div class="card-footer text-center pt-0 px-lg-2 px-1">
                             @if (Route::has('password.request'))
-                                <small class="text-muted">{{ __('Forgot you password? Reset you password') }} <a
+                                <small class="text-muted">{{ __('Forgot your password? Reset your password') }} <a
                                         href="{{ route('password.request') }}"
                                         class="text-info text-gradient font-weight-bold">{{ __('here') }}</a></small>
                             @endif
-                            <p class="mb-4 text-sm mx-auto">
+                            {{-- <p class="mb-4 text-sm mx-auto">
                                 {{ __(' Don\'t have an account?') }}
                                 <a href="{{ route('register') }}"
                                     class="text-info text-gradient font-weight-bold">{{ __('Sign up') }}</a>
-                            </p>
+                            </p> --}}
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
                         <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
-                            style="background-image:url('../assets/img/curved-images/curved6.jpg')"></div>
+                            style="background-image:url('../assets/img/curved-images/background-auth.jpg')"></div>
                     </div>
                 </div>
             </div>
