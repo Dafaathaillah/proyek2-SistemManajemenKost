@@ -296,7 +296,7 @@
         });
 
         $("#form").on("submit",function(){
-            $("#rule").val($("#editor").html());
+            $("#rule").val(quill.container.firstChild.innerHTML);
         })
 
     </script>
