@@ -127,7 +127,7 @@
 
                                 <dt class="col-sm-4">Fasilitas</dt>
                                 <dd class="col-sm-8"> - -- -</dd>
-
+                                
                                 <dt class="col-sm-4">Harga</dt>
                                 <dd class="col-sm-8">Rp {{ number_format($customer->room->price,0,',','.') }}</dd>
                                 
