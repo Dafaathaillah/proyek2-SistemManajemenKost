@@ -56,6 +56,16 @@ class Customer extends Model
         return $this->hasMany(Transactions::class);
     }
 
+    /**
+     * Get all of the messages for the Customer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
     public static function getData()
     {
         return Customer::all();

@@ -45,8 +45,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('customers', CustomerController::class);
     Route::get('customers/{customer}/updateStatus', [CustomerController::class, 'updateStatus'])->name('customers.updateStatus');
     Route::get('transactions/{transaction}/updateStatus', [TransactionController::class, 'updateStatus'])->name('transactions.updateStatus');
+    Route::get('messages/{message}/updateStatus', [MessageController::class, 'updateStatus'])->name('messages.updateStatus');
     Route::view('invoices', 'transactions.invoice');
-    Route::resource('messages', MessageController::class);
 });
 
 Route::middleware(['auth', 'customer'])->group(function () {
@@ -55,4 +55,5 @@ Route::middleware(['auth', 'customer'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('transactions', TransactionController::class);
+    Route::resource('messages', MessageController::class);
 });
