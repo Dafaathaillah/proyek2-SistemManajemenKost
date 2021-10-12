@@ -55,6 +55,11 @@ class Transaction extends Model
         return Transaction::orderByDesc('created_at')->get();
     }
 
+    public static function indexLimit()
+    {
+        return Transaction::orderByDesc('created_at')->limit(5)->get();
+    }
+
     public static function store(Request $request)
     {
         if (Auth::user()->role == 'admin') {
