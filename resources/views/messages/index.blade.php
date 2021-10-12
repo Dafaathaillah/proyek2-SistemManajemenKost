@@ -12,233 +12,150 @@
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-12 col-xl-4 mt-xl-0 mt-4">
-        <div class="card h-100">
-            <div class="card-header pb-0 p-3">
-                <h6 class="mb-0">Conversations</h6>
-            </div>
-            <div class="card-body p-3 w-auto h-auto max-height-vh-100 h-100 overflow-auto">
-                <ul class="list-group">
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                        <div class="avatar me-3">
-                            <img src="../../../assets/img/kal-visuals-square.jpg" alt="kal"
-                                class="border-radius-lg shadow">
-                        </div>
-                        <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Sophie B.</h6>
-                            <p class="mb-0 text-xs">Hi! I need more information..</p>
-                        </div>
-                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                        <div class="avatar me-3">
-                            <img src="../../../assets/img/marie.jpg" alt="kal" class="border-radius-lg shadow">
-                        </div>
-                        <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Anne Marie</h6>
-                            <p class="mb-0 text-xs">Awesome work, can you..</p>
-                        </div>
-                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                        <div class="avatar me-3">
-                            <img src="../../../assets/img/ivana-square.jpg" alt="kal" class="border-radius-lg shadow">
-                        </div>
-                        <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Ivanna</h6>
-                            <p class="mb-0 text-xs">About files I can..</p>
-                        </div>
-                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                        <div class="avatar me-3">
-                            <img src="../../../assets/img/team-4.jpg" alt="kal" class="border-radius-lg shadow">
-                        </div>
-                        <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Peterson</h6>
-                            <p class="mb-0 text-xs">Have a great afternoon..</p>
-                        </div>
-                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                        <div class="avatar me-3">
-                            <img src="../../../assets/img/team-3.jpg" alt="kal" class="border-radius-lg shadow">
-                        </div>
-                        <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Nick Daniel</h6>
-                            <p class="mb-0 text-xs">Hi! I need more information..</p>
-                        </div>
-                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                        <div class="avatar me-3">
-                            <img src="../../../assets/img/kal-visuals-square.jpg" alt="kal"
-                                class="border-radius-lg shadow">
-                        </div>
-                        <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Sophie B.</h6>
-                            <p class="mb-0 text-xs">Hi! I need more information..</p>
-                        </div>
-                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                        <div class="avatar me-3">
-                            <img src="../../../assets/img/marie.jpg" alt="kal" class="border-radius-lg shadow">
-                        </div>
-                        <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Anne Marie</h6>
-                            <p class="mb-0 text-xs">Awesome work, can you..</p>
-                        </div>
-                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                        <div class="avatar me-3">
-                            <img src="../../../assets/img/ivana-square.jpg" alt="kal" class="border-radius-lg shadow">
-                        </div>
-                        <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Ivanna</h6>
-                            <p class="mb-0 text-xs">About files I can..</p>
-                        </div>
-                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                        <div class="avatar me-3">
-                            <img src="../../../assets/img/team-4.jpg" alt="kal" class="border-radius-lg shadow">
-                        </div>
-                        <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Peterson</h6>
-                            <p class="mb-0 text-xs">Have a great afternoon..</p>
-                        </div>
-                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                    </li>
-                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                        <div class="avatar me-3">
-                            <img src="../../../assets/img/team-3.jpg" alt="kal" class="border-radius-lg shadow">
-                        </div>
-                        <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Nick Daniel</h6>
-                            <p class="mb-0 text-xs">Hi! I need more information..</p>
-                        </div>
-                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Reply</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+<div class="d-sm-flex justify-content-between">
+    <div>
+        @if (Auth::user()->role == 'customer')
+            <a href="{{ route('messages.create') }}" class="btn btn-icon bg-gradient-dark">
+                Pesan Baru
+            </a>
+        @endif
     </div>
-    <div class="col-12 col-xl-8 mt-xl-0 mt-4">
-        <div class="card h-100">
-            <div class="card-header pb-0 p-3">
-                <h6 class="mb-0">Anne Marie</h6>
-            </div>
-            <div class="card-body p-3 w-auto h-auto max-height-vh-90 h-90 overflow-auto">
-                <div class="mb-1">
-                    <div class="d-flex mt-3">
-                        <div class="flex-shrink-0">
-                            <img alt="Image placeholder" class="avatar rounded-circle"
-                                src="../../../assets/img/marie.jpg">
-                        </div>
-                        <div class="flex-grow-1 ms-3 me-6">
-                            <p class="text-sm">I always felt like I could do anything. That’s the main thing people are
-                                controlled by! Thoughts- their perception of themselves!</p>
-                        </div>
-                    </div>
-                    <div class="d-flex mt-3">
-                        <div class="flex-grow-1 ms-6 me-3">
-                            <p class="text-sm">Society has put up so many boundaries, so many limitations on what’s
-                                right and wrong that it’s almost impossible to get a pure thought out. It’s like a
-                                little kid, a little boy.</p>
-                            <p class="text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium a
-                                nemo amet quia earum quas tenetur maiores, quaerat odit et adipisci deleniti accusamus
-                                ipsa nesciunt. Facilis, maxime. Sit, et quibusdam.</p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <img alt="Image placeholder" class="avatar rounded-circle"
-                                src="./../../assets/img/bruce-mars.jpg">
-                        </div>
-                    </div>
-                    <div class="d-flex mt-3">
-                        <div class="flex-shrink-0">
-                            <img alt="Image placeholder" class="avatar rounded-circle"
-                                src="../../../assets/img/marie.jpg">
-                        </div>
-                        <div class="flex-grow-1 ms-3 me-6">
-                            <p class="text-sm">A wonderful serenity has taken possession of my entire soul, like these
-                                sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the
-                                charm of existence in this spot, which was created for the bliss of souls like mine.
-                            </p>
-                            <p class="text-sm">I am so happy, my dear friend, so absorbed in the exquisite sense of mere
-                                tranquil existence, that I neglect my talents.
-                            </p>
-                            <p class="text-sm">I should be incapable of drawing a single stroke at the present moment;
-                                and yet I feel that I never was a greater artist than now.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex mt-3">
-                        <div class="flex-grow-1 ms-6 me-3">
-                            <p class="text-sm">When, while the lovely valley teems with vapour around me, and the
-                                meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but
-                                a few stray gleams steal into the inner sanctuary, I throw myself down among the tall
-                                grass by the trickling stream; and, as I lie close to the earth, a thousand unknown
-                                plants are noticed by me: when I hear the buzz of the little world among the stalks, and
-                                grow familiar with the countless indescribable forms of the insects and flies, then I
-                                feel the presence of the Almighty, who formed us in his own image, and the breath</p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <img alt="Image placeholder" class="avatar rounded-circle"
-                                src="./../../assets/img/bruce-mars.jpg">
-                        </div>
-                    </div>
-                    <div class="d-flex mt-3">
-                        <div class="flex-shrink-0">
-                            <img alt="Image placeholder" class="avatar rounded-circle"
-                                src="../../../assets/img/marie.jpg">
-                        </div>
-                        <div class="flex-grow-1 ms-3 me-6">
-                            <p class="text-sm">I am so happy, my dear friend, so absorbed in the exquisite sense of mere
-                                tranquil existence, that I neglect my talents.
-                            </p>
-                            <p class="text-sm">I should be incapable of drawing a single stroke at the present moment;
-                                and yet I feel that I never was a greater artist than now.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex mt-3">
-                        <div class="flex-grow-1 ms-6 me-3">
-                            <p class="text-sm">When, while the lovely valley teems with vapour around me, and the
-                                meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but
-                                a few stray gleams steal into the inner sanctuary, I throw myself down among the tall
-                                grass by the trickling stream.</p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <img alt="Image placeholder" class="avatar rounded-circle"
-                                src="./../../assets/img/bruce-mars.jpg">
-                        </div>
-                    </div>
-                    <div class="d-flex mt-3">
-                        <div class="flex-shrink-0">
-                            <img alt="Image placeholder" class="avatar rounded-circle"
-                                src="../../../assets/img/marie.jpg">
-                        </div>
-                        <div class="flex-grow-1 ms-3 me-6">
-                            <p class="text-sm">I feel the presence of the Almighty, who formed us in his own image.</p>
-                            <p class="text-sm">Awesome work, can you describe these conceptions?</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer p-3">
-                <div class="d-flex">
-                    <div class="flex-grow-1 my-auto">
-                        <form>
-                            <textarea class="form-control" placeholder="Write your comment" rows="2"></textarea>
-                        </form>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <button class="btn bg-gradient-primary m-0 ms-2 h-100">SEND</button>
-                    </div>
-                </div>
+    <div class="d-flex">
+        <div class="dropdown d-inline">
+            <a href="javascript:;" class="btn btn-outline-dark dropdown-toggle " data-bs-toggle="dropdown"
+                id="navbarDropdownMenuLink2">
+                Filters
+            </a>
+            <ul class="dropdown-menu dropdown-menu-lg-start px-2 py-3" aria-labelledby="navbarDropdownMenuLink2"
+                data-popper-placement="left-start">
+                <li><a class="dropdown-item border-radius-md" href="javascript:;">Status: Paid</a></li>
+                <li><a class="dropdown-item border-radius-md" href="javascript:;">Status: Refunded</a></li>
+                <li><a class="dropdown-item border-radius-md" href="javascript:;">Status: Canceled</a></li>
+                <li>
+                    <hr class="horizontal dark my-2">
+                </li>
+                <li><a class="dropdown-item border-radius-md text-danger" href="javascript:;">Remove Filter</a></li>
+            </ul>
+        </div>
+        <button class="btn btn-icon btn-outline-dark ms-2 export" data-type="csv" type="button">
+            <span class="btn-inner--icon"><i class="ni ni-archive-2"></i></span>
+            <span class="btn-inner--text">Export CSV</span>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-flush" id="datatable-search">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Waktu Pesan</th>
+                            <th>Customer</th>
+                            <th>Kamar</th>
+                            <th>Isi Pesan</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($messages as $message)
+                            <tr>
+                                <td class="font-weight-bold">
+                                    <span class="my-2 text-xs">{{ $message->created_at->format('d M, h:i A') }}</span>
+                                </td>
+                                <td class="text-xs font-weight-bold">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-xs me-2 bg-gradient-dark">
+                                            <span>{{ substr($message->customer->user->name, 0, 1) }}</span>
+                                        </div>
+                                        <span>{{ $message->customer->user->name }}</span>
+                                    </div>
+                                </td>
+                                <td class="text-xs font-weight-bold">
+                                    <span class="my-2 text-xs">{{ $message->customer->room->name }}</span>
+                                </td>
+                                <td class="text-xs font-weight-bold">
+                                    <span class="my-2 text-xs">{!! Str::limit($message->message, $limit = 50, $end = '...') !!}</span>
+                                </td>
+                                <td class="text-xs font-weight-bold">
+                                    <div class="d-flex align-items-center">
+                                        @if ($message->status == 'accept')
+                                            <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
+                                                <i class="fas fa-check" aria-hidden="true"></i>
+                                            </button>
+                                            <span>Sukses</span>
+                                        @else
+                                            @if (Auth::user()->role == 'customer')
+                                                <a href="#" class="btn btn-icon-only btn-rounded btn-outline-warning mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
+                                                    <i class="fas fa-exclamation" aria-hidden="true"></i>
+                                                </a>
+                                                <span>Pending</span>
+                                            @else
+                                                <a href="{{ route('messages.updateStatus', $message->id) }}" class="btn btn-icon-only btn-rounded btn-outline-warning mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
+                                                    <i class="fas fa-exclamation" aria-hidden="true"></i>
+                                                </a>
+                                                <span>Pending</span>
+                                            @endif
+                                        @endif
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Detail customer" data-bs-toggle="modal" data-bs-target="#detail{{ $message->id }}">
+                                        <i class="fa fa-clipboard"></i> Detail Pesan
+                                    </a> &nbsp;
+                                    @if (Auth::user()->role == 'customer' && $message->status == 'pending')
+                                        <a href="{{ route('messages.edit', $message->id) }}" class="text-secondary font-weight-bold text-xs"
+                                            data-toggle="tooltip" data-original-title="Edit transaksi">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
+                            <div class="modal fade" id="detail{{ $message->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h6 class="modal-title" id="modal-title-default">Detail Pesan</h6>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <dl class="row">
+                                                <dt class="col-sm-4">Nama Customer</dt>
+                                                <dd class="col-sm-8">{{ $message->customer->user->name }}</dd>
+                                              
+                                                <dt class="col-sm-4">Nama Kamar</dt>
+                                                <dd class="col-sm-8">{{ $message->customer->room->name }}</dd>
+                                              
+                                                <dt class="col-sm-4">Isi Pesan</dt>
+                                            <dd class="col-sm-8">{!! $message->message !!}</dd>
+                                            </dl>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@push('script')
+    <script src="{{ asset('assets/js/plugins/datatables.js') }}"></script>
+    <script>
+        const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+            searchable: true,
+            fixedHeight: true,
+            perPageSelect: false
+        });
+
+    </script>
+@endpush
