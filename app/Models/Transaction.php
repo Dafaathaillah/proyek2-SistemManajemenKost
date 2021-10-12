@@ -58,6 +58,11 @@ class Transaction extends Model
     public static function indexLimit()
     {
         return Transaction::orderByDesc('created_at')->limit(5)->get();
+
+    public static function getDataByCustomerDesc($customer_id)
+    {
+        return Transaction::where('customer_id', $customer_id)->orderByDesc('created_at')->get();
+
     }
 
     public static function store(Request $request)
@@ -65,9 +70,11 @@ class Transaction extends Model
         if (Auth::user()->role == 'admin') {
             $payment_method = 'cash';
             $status = 'accept';
+            $evidence = NULL;
         } else {
             $payment_method = 'transfer';
             $status = 'pending';
+            $evidence = $request->file('evidence')->store('evidence', 'public');
         }
 
         $transaction = Transaction::create([
@@ -75,6 +82,7 @@ class Transaction extends Model
             'payment_method' => $payment_method,
             'total' => $request->total,
             'description' => $request->description,
+            'evidence' => $evidence,     
             'status' => $status,
         ]);
         return $transaction->id;
@@ -82,10 +90,33 @@ class Transaction extends Model
 
     public static function edit(Request $request, Transaction $transaction)
     {
-        $transaction->update([
-            'customer_id' => $request->customer_id,
-            'total' => $request->total,
-            'description' => $request->description,
-        ]);
+        if (Auth::user()->role == 'admin') {
+            $transaction->update([
+                'customer_id' => $request->customer_id,
+                'total' => $request->total,
+                'description' => $request->description,
+            ]);
+        } else {
+            if($request->file('evidence') == "") {
+                $transaction->update([
+                    'customer_id' => $request->customer_id,
+                    'total' => $request->total,
+                    'description' => $request->description,
+                ]);
+            } else {
+                if ($transaction->evidence&&file_exists(storage_path('app/public/'.$transaction->evidence))) {
+                    \Storage::delete('public/'.$transaction->evidence);
+                }
+                $evidence = $request->file('evidence')->store('evidence', 'public');
+                $transaction->update([
+                    'customer_id' => $request->customer_id,
+                    'total' => $request->total,
+                    'description' => $request->description,
+                    'evidence' => $evidence,
+                ]);
+                // $image = $request->file('image');
+                // $image->storeAs('public/', $image->hashName());
+            }
+        }
     }
 }
