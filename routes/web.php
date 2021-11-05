@@ -47,6 +47,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('transactions/{transaction}/updateStatus', [TransactionController::class, 'updateStatus'])->name('transactions.updateStatus');
     Route::get('messages/{message}/updateStatus', [MessageController::class, 'updateStatus'])->name('messages.updateStatus');
     Route::view('invoices', 'transactions.invoice');
+    Route::get('/exportexcel', [TransactionController::class, 'exportexcel'])->name('exportexcel');
+    Route::get('/exportexcelmessage', [MessageController::class, 'exportexcelmessage'])->name('exportexcelmessage');
 });
 
 Route::middleware(['auth', 'customer'])->group(function () {

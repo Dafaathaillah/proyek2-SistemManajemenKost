@@ -37,7 +37,7 @@
         </div>
         <button class="btn btn-icon btn-outline-dark ms-2 export" data-type="csv" type="button">
             <span class="btn-inner--icon"><i class="ni ni-archive-2"></i></span>
-            <span class="btn-inner--text">Export CSV</span>
+            <a href="/exportexcel"><span class="btn-inner--text">Export CSV</span></a>
         </button>
     </div>
 </div>
