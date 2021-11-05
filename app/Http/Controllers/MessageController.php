@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Alert;
 use App\Models\Message;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Exports\MessageExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
-use Alert;
-use Auth;
 
 class MessageController extends Controller
 {
@@ -115,6 +117,9 @@ class MessageController extends Controller
         return redirect()->route('messages.index');
     }
 
+    public function exportexcelmessage(){
+        return Excel::download(new MessageExport, 'Message.csv');
+    }
     /**
      * Remove the specified resource from storage.
      *

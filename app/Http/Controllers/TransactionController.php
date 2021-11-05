@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
-use App\Models\TransactionDetail;
-use App\Models\Customer;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Alert;
 use Auth;
+use Alert;
+use App\Models\Customer;
+use App\Models\Transaction;
+use Illuminate\Http\Request;
+use App\Models\TransactionDetail;
+use App\Exports\TransactionExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
 
 class TransactionController extends Controller
 {
@@ -130,6 +132,9 @@ class TransactionController extends Controller
         return redirect()->route('transactions.index');
     }
 
+    public function exportexcel(){
+        return Excel::download(new TransactionExport, 'Transaction.csv');
+    }
     /**
      * Remove the specified resource from storage.
      *
