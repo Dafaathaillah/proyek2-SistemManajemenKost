@@ -117,8 +117,42 @@ class MessageController extends Controller
         return redirect()->route('messages.index');
     }
 
-    public function exportexcelmessage(){
-        return Excel::download(new MessageExport, 'Message.csv');
+    // public function exportexcelmessage(){
+    //     return Excel::download(new MessageExport, 'Message.csv');
+    // }
+
+    public function exportexcelmessage(Request $request)
+    {
+   $fileName = 'Message.csv';
+   $message = Message::all();
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        $columns = array('Customer_Id', 'Message', 'Status' , 'Start Date', 'Update Date');
+
+        $callback = function() use($message, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+            foreach ($message as $task) {
+                $row['Customer_Id']  = $task->customer_id;
+                $row['Message']    = $task->message;
+                $row['Status']    = $task->status;
+                $row['Start Date']  = $task->created_at;
+                $row['Update Date']  = $task->updated_at;
+
+                fputcsv($file, array($row['Customer_Id'], $row['Message'], $row['Status'] , $row['Start Date'], $row['Update Date']));
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
     /**
      * Remove the specified resource from storage.

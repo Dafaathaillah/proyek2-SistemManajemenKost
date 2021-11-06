@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\TransactionDetail;
+use DB;
 use App\Exports\TransactionExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
@@ -132,8 +133,48 @@ class TransactionController extends Controller
         return redirect()->route('transactions.index');
     }
 
-    public function exportexcel(){
-        return Excel::download(new TransactionExport, 'Transaction.csv');
+    // public function exportexcel(){
+    //     return Excel::download(new TransactionExport, 'Transaction.csv');
+    // }
+
+    public function exportexcel(Request $request)
+{
+    // $transaction = DB::table("transactions")->select('evidence')->get();
+    // return $transaction;
+
+   $fileName = 'transaction.csv';
+   $transaction = Transaction::all();
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        $columns = array('Customer_Id', 'Payment_Method', 'Total' , 'Description', 'Evidence' , 'Start Date', 'Update Date');
+
+        $callback = function() use($transaction, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+            foreach ($transaction as $task) {
+                $row['Customer_Id']  = $task->customer_id;
+                $row['Payment_Method']    = $task->payment_method;
+                $row['Total']    = $task->total;
+                $row['Description']    = $task->description;
+                // $row['Evidence']    = file_get_contents('storage/'. $task->evidence);
+                $row['Evidence']    = $task->evidence;
+                $row['Start Date']  = $task->created_at;
+                $row['Update Date']  = $task->updated_at;
+
+                fputcsv($file, array($row['Customer_Id'], $row['Payment_Method'], $row['Total'] , $row['Description'], $row['Evidence'] , $row['Start Date'], $row['Update Date']));
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
     /**
      * Remove the specified resource from storage.
