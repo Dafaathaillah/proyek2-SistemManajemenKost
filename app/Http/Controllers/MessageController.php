@@ -18,13 +18,24 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $filters = $request->get('filter');
         if (Auth::user()->role == 'admin') {
             $messages = Message::getDataDesc();
+            if ($filters === 'accept'){
+                $messages = $messages->where('status', 'accept');
+            }if($filters === 'pending'){
+                $messages = $messages->where('status', 'pending');
+            }
         } else {
             $customer = Customer::select('id')->where('user_id', Auth::user()->id)->first();
             $messages = Message::getDataByCustomerDesc($customer->id);
+            if ($filters === 'accept'){
+                $messages = $messages->where('status', 'accept');
+            }if($filters === 'pending'){
+                $messages = $messages->where('status', 'pending');
+            }
         }
         return view('messages.index', compact('messages'));
     }

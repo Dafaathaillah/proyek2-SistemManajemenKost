@@ -21,6 +21,7 @@
         @endif
     </div>
     <div class="d-flex">
+    <form enctype="multipart/form-data" action="" >
         <div class="dropdown d-inline">
             <a href="javascript:;" class="btn btn-outline-dark dropdown-toggle " data-bs-toggle="dropdown"
                 id="navbarDropdownMenuLink2">
@@ -28,15 +29,15 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-lg-start px-2 py-3" aria-labelledby="navbarDropdownMenuLink2"
                 data-popper-placement="left-start">
-                <li><a class="dropdown-item border-radius-md" href="javascript:;">Status: Paid</a></li>
-                <li><a class="dropdown-item border-radius-md" href="javascript:;">Status: Refunded</a></li>
-                <li><a class="dropdown-item border-radius-md" href="javascript:;">Status: Canceled</a></li>
+                <li><button  name="filter" type="submit" value="accept" class="dropdown-item border-radius-md">Status: Success</button ></li>
+                <li><button name="filter" type="submit" value="pending" class="dropdown-item border-radius-md">Status: Pending</button ></li>
                 <li>
                     <hr class="horizontal dark my-2">
                 </li>
-                <li><a class="dropdown-item border-radius-md text-danger" href="javascript:;">Remove Filter</a></li>
+                <li><button class="dropdown-item border-radius-md text-danger">Remove Filter</a></li>
             </ul>
         </div>
+        </form>
         <button class="btn btn-icon btn-outline-dark ms-2 export" data-type="csv" type="button">
             <span class="btn-inner--icon"><i class="ni ni-archive-2"></i></span>
             <a href="/exportexcelmessage"><span class="btn-inner--text">Export CSV</span></a>
