@@ -20,13 +20,24 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $filters = $request->get('filter');
         if (Auth::user()->role == 'admin') {
             $transactions = Transaction::getDataDesc();
+            if ($filters === 'accept'){
+                $transactions = $transactions->where('status', 'accept');
+            }if($filters === 'pending'){
+                $transactions = $transactions->where('status', 'pending');
+            }
         } else {
             $customer = Customer::select('id')->where('user_id', Auth::user()->id)->first();
             $transactions = Transaction::getDataByCustomerDesc($customer->id);
+            if ($filters === 'accept'){
+                $transactions = $transactions->where('status', 'accept');
+            }if($filters === 'pending'){
+                $transactions = $transactions->where('status', 'pending');
+            }
         }
         return view('transactions.index', compact('transactions'));
     }
