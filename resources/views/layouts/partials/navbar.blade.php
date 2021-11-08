@@ -66,6 +66,11 @@
                     <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
                         aria-labelledby="dropdownMenuButton">
                         <li class="mb-2">
+                        @php
+                            $notifikasiMessages = App\Models\Message::getDataNotifLimit()
+                        @endphp
+                        
+                        @foreach ($notifikasiMessages as $message)
                             <a class="dropdown-item border-radius-md" href="javascript:;">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
@@ -73,36 +78,28 @@
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                         <h6 class="text-sm font-weight-normal mb-1">
-                                            <span class="font-weight-bold">New message</span> from Laur
+                                            <span class="font-weight-bold">New message</span> From {{ $message->customer->user->name }}
                                         </h6>
-                                        <p class="text-xs text-secondary mb-0">
-                                            <i class="fa fa-clock me-1"></i>
-                                            13 minutes ago
+                                        <p class="text-xs text-secondary mb-0"> 
+                                        {!! Str::limit($message->message, $limit = 20, $end = '...') !!}
                                         </p>
+                                        <p class="text-xs text-secondary mb-0">
+                                            <i class="fa fa-clock me-1">
+                                                {{ $message->status }}
+                                                
+                                            </i>
+                                            
                                     </div>
                                 </div>
                             </a>
-                        </li>
-                        <li class="mb-2">
-                            <a class="dropdown-item border-radius-md" href="javascript:;">
-                                <div class="d-flex py-1">
-                                    <div class="my-auto">
-                                        <img src="../assets/img/small-logos/logo-spotify.svg"
-                                            class="avatar avatar-sm bg-gradient-dark  me-3 ">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="text-sm font-weight-normal mb-1">
-                                            <span class="font-weight-bold">New album</span> by Travis Scott
-                                        </h6>
-                                        <p class="text-xs text-secondary mb-0">
-                                            <i class="fa fa-clock me-1"></i>
-                                            1 day
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
+                        @endforeach
                         </li>
                         <li>
+                        @php
+                        $notifikasiTransactions = App\Models\Transaction::getDataNotifLimit()
+                        @endphp
+
+                        @foreach($notifikasiTransactions as $transaction)
                             <a class="dropdown-item border-radius-md" href="javascript:;">
                                 <div class="d-flex py-1">
                                     <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
@@ -129,15 +126,18 @@
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                         <h6 class="text-sm font-weight-normal mb-1">
-                                            Payment successfully completed
+                                            <span class="font-weight-bold">New Transaction</span> From {{ $transaction->customer->user->name }}
                                         </h6>
                                         <p class="text-xs text-secondary mb-0">
                                             <i class="fa fa-clock me-1"></i>
-                                            2 days
+                                            {{ $transaction->created_at }} Status {{ $transaction->status }}
                                         </p>
+                                        
                                     </div>
+                                
                                 </div>
                             </a>
+                        @endforeach
                         </li>
                     </ul>
                 </li>

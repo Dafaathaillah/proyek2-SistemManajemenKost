@@ -60,6 +60,11 @@ class Transaction extends Model
         return Transaction::orderByDesc('created_at')->limit(5)->get();
     }
 
+    public static function getDataNotifLimit()
+    {
+        return Transaction::orderByDesc('created_at')->limit(3)->get();
+    }
+
     public static function getDataByCustomerDesc($customer_id)
     {
         return Transaction::where('customer_id', $customer_id)->orderByDesc('created_at')->get();
