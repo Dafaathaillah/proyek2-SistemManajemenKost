@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BoardingHouse;
 use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
 {
     public function landingPage()
     {
-        return view('website.landing_page');
+        $boardinghouses = BoardingHouse::all();
+        return view('website.landing_page', compact('boardinghouses'));
     }
 
     public function bookingPage()
@@ -28,6 +30,6 @@ class WebsiteController extends Controller
 
     public function contactUs()
     {
-        
+
     }
 }
