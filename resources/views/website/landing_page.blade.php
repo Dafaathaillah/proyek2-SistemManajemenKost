@@ -6,22 +6,30 @@
         <div class="position-absolute border-radius-lg border-top-start-radius-0 border-top-end-radius-0 border-bottom-end-radius-0 fixed-top ms-auto w-50 h-100 z-index-0 d-none d-sm-none d-md-block"
             style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/office.jpg'); background-size:cover;">
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 d-flex justify-content-center flex-column">
-                    <div class="card card-body blur d-flex justify-content-center px-5 shadow-lg mt-lg-5 mt-3 py-5">
-                        <h1 class="text-gradient text-warning mb-0">Rumah Kos</h1>
-                        <h1 class="mb-4">Bougenville</h1>
-                        <p class="lead pe-sm-5 me-sm-5 mr-5">Rumah kos putri dengan tempat strategis di Kota Malang.</p>
-                        <div class="buttons">
-                            <a href="{{ route('bookingPage') }}" class="btn bg-gradient-warning mt-4">Booking Now</a>
+        {{--Menampilkan Nama Kos dan Deskripsi--}}
+        @foreach ($boardinghouses as $boardinghouse)
+            <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7 d-flex justify-content-center flex-column">
+                                <div class="card card-body blur d-flex justify-content-center px-5 shadow-lg mt-lg-5 mt-3 py-5">
+                                    <h1 class="text-gradient text-warning mb-0">Rumah Kos</h1>
+                                    <h1 class="mb-4">{{ $boardinghouse -> name}}</h1>
+                                    <p class="lead pe-sm-5 me-sm-5 mr-5">
+                                        Rumah kos putri dengan tempat strategis di Kota Malang.
+                                    </p>
+                                    {{--<p class="lead pe-sm-5 me-sm-5 mr-5">Rumah kos putri dengan tempat strategis di Kota Malang.</p>--}}
+                                    <div class="buttons">
+                                        <a href="{{ route('bookingPage') }}" class="btn bg-gradient-warning mt-4">Booking Now</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</header>
+            </header>
+        @endforeach
+
+        {{--Bagian Menampilkan Fasilitas Unggulan Kos--}}
 <section class="pt-7 pb-5">
     <div class="container">
         <div class="row text-center">
@@ -51,7 +59,7 @@
                         </svg>
                     </div>
                     <h5 class="mt-2">Good Location</h5>
-                    <p>We get insulted by others, lose trust for those We get back.</p>
+                    <p>Lokasi kos berada di daerah central yang dekat dengan berbagai fasilitas umum dan kampus</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -79,8 +87,8 @@
                             </g>
                         </svg>
                     </div>
-                    <h5 class="mt-2">Great Co-Workers</h5>
-                    <p>We get insulted by others, lose trust for those We get back.</p>
+                    <h5 class="mt-2">Ragam pilihan kamar</h5>
+                    <p>Kamar dengan kamar mandi dalam atau kamar mandi luar</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -111,8 +119,8 @@
                             </g>
                         </svg>
                     </div>
-                    <h5 class="mt-2">Learn Opportunity</h5>
-                    <p>We get insulted by others, lose trust for those We get back.</p>
+                    <h5 class="mt-2">Wifi</h5>
+                    <p>Maximum speed hingga 100 Mbps</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -138,14 +146,17 @@
                             </g>
                         </svg>
                     </div>
-                    <h5 class="mt-2">Performance Benefits</h5>
-                    <p>We get insulted by others, lose trust for those We get back.</p>
+                    <h5 class="mt-2">Pembayaran</h5>
+                    <p>Lebih mudah bayar untuk kos</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="py-4">
+
+{{--Bagian Menampilkan Data Kos (Alamat, Kontak, dan Peraturan)--}}
+@foreach ($boardinghouses as $boardinghouse)
+    <section class="py-4">
     <div class="container py-5">
         <div class="row align-items-center">
             <div class="col-md-6">
@@ -160,74 +171,92 @@
                 </div>
             </div>
             <div class="col-md-6 mb-md-0 mb-4" style="padding-left: 50px !important">
-                <h3 class="text-gradient text-warning mb-0">Come and meet us</h3>
-                <h3>500+ offices</h3>
+                <h3 class="text-gradient text-warning mb-0">{{ $boardinghouse -> name}}</h3>
+                <h3>{{ $boardinghouse -> address}}</h3>
                 <p class="mb-4">
-                    Technology is applied science. Science is the study of nature. Mathematics is the language of
-                    nature. Philosophy is the root of mathematics. All tightly interrelated.
+                    {{ $boardinghouse -> description}}
                 </p>
-                <p class="font-weight-bold"><span class="me-2">-</span> Showcase and embed your work with</p>
-                <p class="font-weight-bold"><span class="me-2">-</span> Publish across social channels in a click</p>
+                <p class="font-weight-bold">Kontak Pemilik Kos</p>
+                <div style="font-size: 16px">
+                    <i class="fas fa-phone"></i>
+                    <i class="mb-4">{!! $boardinghouse -> phone_number!!} ({!! $boardinghouse -> owner!!})</i>
+                </div>
+                <p></p>
+                <div style="font-size: 16px">
+                    <i class="fas fa-mobile"></i>
+                    <i class="mb-4">{!! $boardinghouse -> whatsapp_number!!} ({!! $boardinghouse -> owner!!})</i>
+                </div>
+                <br>
+                <p class="font-weight-bold"> Aturan Kost</p>
+                <div class="mb-2">
+                    {!! $boardinghouse->rule !!}
+                </div>
+                {{--<p class="font-weight-bold"><span class="me-2">-</span> Publish across social channels in a click</p>
                 <p class="font-weight-bold"><span class="me-2">-</span> Sell your videos worldwide</p>
-                <p class="font-weight-bold mb-5"><span class="me-2">-</span> Make more profit</p>
-                <a href="javascript:;" class="text-info icon-move-right">Learn More
+                <p class="font-weight-bold mb-5"><span class="me-2">-</span> Make more profit</p> --}}
+                <a href="javascript:;" class="text-info icon-move-right">Booking
                     <i class="fas fa-arrow-right text-sm ps-1" aria-hidden="true"></i>
                 </a>
             </div>
         </div>
     </div>
 </section>
+@endforeach
+
+{{--Bagian Menampilkan Data Jumlah Kamar, Kamar Terisi, dan Jumlah Fasilitas--}}
 <section class="pt-2 pb-6 bg-gray-100" id="count-stats">
     <div class="container">
         <div class="row mt-6 justify-content-center text-center">
             <div class="col-md-3">
-                <h1 class="text-gradient text-warning" id="state1" countto="5234">5,234</h1>
-                <h5>Projects</h5>
-                <p>Of “high-performing” level are led by a certified project manager</p>
+                <h1 class="text-gradient text-warning" id="state1" countto="8">8</h1>
+                <h5>Jumlah Kamar</h5>
             </div>
             <div class="col-md-3">
-                <h1 class="text-gradient text-warning"><span id="state2" countto="3400">3,400</span>+</h1>
-                <h5>Hours</h5>
-                <p>That meets quality standards required by our users</p>
+                <h1 class="text-gradient text-warning"><span id="state2" countto="3">3</span></h1>
+                <h5>Kamar Terisi</h5>
             </div>
             <div class="col-md-3">
-                <h1 class="text-gradient text-warning"><span id="state3" countto="24">24</span>/7</h1>
-                <h5>Support</h5>
-                <p>Actively engage team members that finishes on time</p>
+                <h1 class="text-gradient text-warning"><span id="state3" countto="5">5</span></h1>
+                <h5>Kamar Kosong</h5>
             </div>
         </div>
     </div>
 </section>
+
+{{--Bagian Testimonials--}}
+@foreach ($boardinghouses as $boardinghouse)
 <section class="py-lg-7 py-5">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 mx-auto text-center">
-                <h2 class="text-gradient text-warning mb-0">What random people</h2>
-                <h2 class="mb-3">Think about us</h2>
-                <p>That’s the main thing people are controlled by! Thoughts- their perception of themselves! </p>
+                <h2 class="text-gradient text-warning mb-0">Testimoni</h2>
+                <h2 class="mb-3">{{ $boardinghouse -> name}}</h2>
+                <p>Kata mereka tentang kos kami ! </p>
             </div>
         </div>
+@endforeach
+
         <div class="row mt-6">
             <div class="col-lg-4 col-md-8">
                 <div class="card card-plain">
                     <div class="card-body">
                         <div class="author">
-                            <img src="../assets/img/team-3.jpg" alt="..." class="avatar shadow">
+                            <img src="../assets/img/marie.jpg" alt="..." class="avatar shadow">
                             <div class="name ps-2">
-                                <span>Mathew Glock</span>
+                                <span>Intansari Putri</span>
                                 <div class="stats">
-                                    <small><i class="far fa-clock" aria-hidden="true"></i> 5 min read</small>
+                                    <small><i class="far fa-clock" aria-hidden="true"></i> 22 September 2020</small>
                                 </div>
                             </div>
                         </div>
-                        <p class="mt-4">"If you have the opportunity to play this game of life you need to appreciate
-                            every moment."</p>
+                        <p class="mt-4">"Kamarnya bersih, rapi, dan wangi. Fasilitas lengkap dan siap pakai.
+                            Nggak rugi buat kos disini."</p>
                         <div class="rating mt-3">
                             <i class="fas fa-star" aria-hidden="true"></i>
                             <i class="fas fa-star" aria-hidden="true"></i>
                             <i class="fas fa-star" aria-hidden="true"></i>
                             <i class="fas fa-star" aria-hidden="true"></i>
-                            <i class="far fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -238,19 +267,18 @@
                         <div class="author align-items-center">
                             <img src="../assets/img/marie.jpg" alt="..." class="avatar shadow">
                             <div class="name ps-2">
-                                <span class="text-white">Mathew Glock</span>
+                                <span class="text-white">Dewi Paripurna</span>
                                 <div class="stats">
-                                    <small class="text-white">Posted on 28 February</small>
+                                    <small class="far fa-clock" aria-hidden="true"> 28 February 2021</small>
                                 </div>
                             </div>
                         </div>
-                        <p class="mt-4 text-white">"If you have the opportunity to play this game of life you need to
-                            appreciate every moment."</p>
+                        <p class="mt-4 text-white">"Semenjak pindah ke kos ini, perasaan menjadi senang dan tenang. Lingkungan di kos ini juga nyaman"</p>
                         <div class="rating mt-3">
                             <i class="fas fa-star text-white" aria-hidden="true"></i>
                             <i class="fas fa-star text-white" aria-hidden="true"></i>
                             <i class="fas fa-star text-white" aria-hidden="true"></i>
-                            <i class="far fa-star text-white" aria-hidden="true"></i>
+                            <i class="fas fa-star text-white" aria-hidden="true"></i>
                             <i class="far fa-star text-white" aria-hidden="true"></i>
                         </div>
                     </div>
@@ -260,16 +288,15 @@
                 <div class="card card-plain">
                     <div class="card-body">
                         <div class="author">
-                            <img src="../assets/img/team-2.jpg" alt="..." class="avatar shadow">
+                            <img src="../assets/img/marie.jpg" alt="..." class="avatar shadow">
                             <div class="name ps-2">
-                                <span>Mathew Glock</span>
+                                <span>Dewi Ayu</span>
                                 <div class="stats">
-                                    <small><i class="far fa-clock" aria-hidden="true"></i> 5 min read</small>
+                                    <small class="far fa-clock" aria-hidden="true"> 16 Mei 2021</small>
                                 </div>
                             </div>
                         </div>
-                        <p class="mt-4">"If you have the opportunity to play this game of life you need to appreciate
-                            every moment."</p>
+                        <p class="mt-4">"Senang sekali bisa booking kamar di kos ini. Karena kos ini recommended jadi harus segera booking."</p>
                         <div class="rating mt-3">
                             <i class="fas fa-star" aria-hidden="true"></i>
                             <i class="fas fa-star" aria-hidden="true"></i>
