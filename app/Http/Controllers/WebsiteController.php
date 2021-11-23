@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
 use App\Models\BoardingHouse;
 use Illuminate\Http\Request;
 
@@ -15,12 +16,14 @@ class WebsiteController extends Controller
 
     public function bookingPage()
     {
-        return view('website.booking_page');
+        $rooms = Room::getData()->where('status', 'available');
+        return view('website.booking_page', compact('rooms'));
     }
 
-    public function detailPage()
+    public function detailPage($id)
     {
-        return view('website.room_detail');
+        $room = Room::findOrFail($id);
+        return view('website.room_detail', compact('room'));
     }
 
     public function bookingForm()
