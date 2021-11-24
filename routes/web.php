@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardingHouseController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\RegencyController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\VillageController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\WebsiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,12 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+Route::get('/', [WebsiteController::class, 'landingPage'])->name('landingPage');
+Route::get('/booking_page', [WebsiteController::class, 'bookingPage'])->name('bookingPage');
+Route::get('/{id}/detail', [WebsiteController::class, 'detailPage'])->name('detailPage');
+Route::get('/booking_form', [WebsiteController::class, 'bookingForm'])->name('bookingForm');
+Route::get('/contact_us', [WebsiteController::class, 'contactUs'])->name('contactUs');
+
 Auth::routes();
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -44,9 +52,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('files/remove', [FileController::class, 'removeFile'])->name('file.remove');
     Route::resource('customers', CustomerController::class);
     Route::get('customers/{customer}/updateStatus', [CustomerController::class, 'updateStatus'])->name('customers.updateStatus');
+    Route::resource('bookings', BookingController::class);
     Route::get('transactions/{transaction}/updateStatus', [TransactionController::class, 'updateStatus'])->name('transactions.updateStatus');
     Route::get('messages/{message}/updateStatus', [MessageController::class, 'updateStatus'])->name('messages.updateStatus');
     Route::view('invoices', 'transactions.invoice');
+    Route::get('/exportexcel', [TransactionController::class, 'exportexcel'])->name('exportexcel');
+    Route::get('/exportexcelmessage', [MessageController::class, 'exportexcelmessage'])->name('exportexcelmessage');
 });
 
 Route::middleware(['auth', 'customer'])->group(function () {
