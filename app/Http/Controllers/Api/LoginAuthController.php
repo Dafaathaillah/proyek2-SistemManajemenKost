@@ -14,11 +14,9 @@ class LoginAuthController extends Controller
 {
     public function login(Request $request){
         $request->validate([
-            // 'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-            // 'role' => 'required',
-            // 'device_name' => 'required',
+            'device_name' => 'required',
         ]);
     
         $user = User::where('email', $request->email)->first();
