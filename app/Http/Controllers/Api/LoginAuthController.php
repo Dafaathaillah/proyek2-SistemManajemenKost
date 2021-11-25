@@ -18,7 +18,7 @@ class LoginAuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             // 'role' => 'required',
-            // 'device_name' => 'required',
+            'device_name' => 'required',
         ]);
     
         $user = User::where('email', $request->email)->first();
