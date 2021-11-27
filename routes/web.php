@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardingHouseController;
-use App\Http\Controllers\BookingController;
 use App\Http\Controllers\RegencyController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\VillageController;
@@ -34,9 +33,9 @@ Route::get('/', function () {
 Route::get('/', [WebsiteController::class, 'landingPage'])->name('landingPage');
 Route::get('/booking_page', [WebsiteController::class, 'bookingPage'])->name('bookingPage');
 Route::get('/{id}/detail', [WebsiteController::class, 'detailPage'])->name('detailPage');
-Route::get('/booking_form', [WebsiteController::class, 'bookingForm'])->name('bookingForm');
+Route::get('/booking_form/{id}', [WebsiteController::class, 'bookingForm'])->name('bookingForm');
+Route::post('/booking_form', [WebsiteController::class, 'storeBookingForm'])->name('storeBookingForm');
 Route::get('/contact_us', [WebsiteController::class, 'contactUs'])->name('contactUs');
-
 Auth::routes();
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -52,7 +51,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('files/remove', [FileController::class, 'removeFile'])->name('file.remove');
     Route::resource('customers', CustomerController::class);
     Route::get('customers/{customer}/updateStatus', [CustomerController::class, 'updateStatus'])->name('customers.updateStatus');
-    Route::resource('bookings', BookingController::class);
     Route::get('transactions/{transaction}/updateStatus', [TransactionController::class, 'updateStatus'])->name('transactions.updateStatus');
     Route::get('messages/{message}/updateStatus', [MessageController::class, 'updateStatus'])->name('messages.updateStatus');
     Route::view('invoices', 'transactions.invoice');
