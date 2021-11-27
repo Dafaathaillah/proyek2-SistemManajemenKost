@@ -15,7 +15,7 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained();
+            $table->foreignId('customer_id')->constrained('customers');
             $table->date('check_in_date');
             $table->enum('status', ['pending', 'reject', 'expired', 'accept']);
             $table->timestamps();
