@@ -1,21 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
     public function login(Request $request){
         $request->validate([
-            'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-            'role' => 'required',
             'device_name' => 'required',
         ]);
     
