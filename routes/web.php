@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\WebsiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,12 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+Route::get('/', [WebsiteController::class, 'landingPage'])->name('landingPage');
+Route::get('/booking_page', [WebsiteController::class, 'bookingPage'])->name('bookingPage');
+Route::get('/{id}/detail', [WebsiteController::class, 'detailPage'])->name('detailPage');
+Route::get('/booking_form/{id}', [WebsiteController::class, 'bookingForm'])->name('bookingForm');
+Route::post('/booking_form', [WebsiteController::class, 'storeBookingForm'])->name('storeBookingForm');
+Route::get('/contact_us', [WebsiteController::class, 'contactUs'])->name('contactUs');
 Auth::routes();
 
 Route::middleware(['auth', 'admin'])->group(function () {

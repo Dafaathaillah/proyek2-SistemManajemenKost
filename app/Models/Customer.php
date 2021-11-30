@@ -66,6 +66,11 @@ class Customer extends Model
         return $this->hasMany(Message::class);
     }
 
+    public function bookings()
+    {
+        return $this->hasOne(BookingMessage::class);
+    }
+
     public static function getData()
     {
         return Customer::all();

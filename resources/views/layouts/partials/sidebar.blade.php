@@ -59,6 +59,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link {{ (request()->segment(1) == 'bookings') ? 'active' : '' }}" href="">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fas fa-clipboard-list {{ (request()->segment(1) != 'bookings') ? 'text-dark' : '' }}" style="font-size: 13px; top: 0px !important"></i>
+              </div>
+              <span class="nav-link-text ms-1">Pemesanan Kamar</span>
+            </a>
+          </li>
+          <li class="nav-item">
           <li class="nav-item">
             <a class="nav-link {{ Request::segment(1) === 'transactions' ? 'active' : '' }}" href="{{ route('transactions.index') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
