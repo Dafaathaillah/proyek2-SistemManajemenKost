@@ -24,6 +24,7 @@ class Customer extends Model
         'phone_number',
         'whatsapp_number',
         'status',
+        'id_card_file',
     ];
 
     /**
@@ -68,7 +69,7 @@ class Customer extends Model
 
     public function bookings()
     {
-        return $this->hasOne(BookingMessage::class);
+        return $this->hasMany(Booking::class);
     }
 
     public static function getData()
@@ -93,15 +94,29 @@ class Customer extends Model
 
     public static function store(Request $request, $id)
     {
-        Customer::create([
-            'id_number' => $request->id_number,
-            'user_id' => $id,
-            'room_id' => $request->room_id,
-            'gender' => $request->gender,
-            'address' => $request->address,
-            'phone_number' => $request->phone_number,
-            'whatsapp_number' => $request->whatsapp_number,
-        ]);
+        if (!isset($request->id_card_file)) {
+            Customer::create([
+                'id_number' => $request->id_number,
+                'user_id' => $id,
+                'room_id' => $request->room_id,
+                'gender' => $request->gender,
+                'address' => $request->address,
+                'phone_number' => $request->phone_number,
+                'whatsapp_number' => $request->whatsapp_number,
+            ]);
+        } else {
+            $customer = Customer::create([
+                'id_number' => $request->id_number,
+                'user_id' => $id,
+                'room_id' => $request->room_id,
+                'gender' => 'P',
+                'address' => $request->address,
+                'whatsapp_number' => $request->whatsapp_number,
+                'status' => 'inactive',
+            ]);
+
+            return $customer->id;
+        }
     }
 
     public static function edit(Request $request, Customer $customer)
