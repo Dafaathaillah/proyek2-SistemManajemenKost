@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Models\Booking;
 use App\Models\BoardingHouse;
+use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Alert;
 
 class WebsiteController extends Controller
 {
@@ -26,9 +30,11 @@ class WebsiteController extends Controller
         return view('website.room_detail', compact('room'));
     }
 
-    public function bookingForm()
+    public function bookingForm($id)
     {
-        return view('website.booking_form');
+        $room = Room::findOrFail($id);
+        $boardingHouse = BoardingHouse::first();
+        return view('website.booking_form', compact('room', 'boardingHouse'));
     }
 
     public function contactUs()

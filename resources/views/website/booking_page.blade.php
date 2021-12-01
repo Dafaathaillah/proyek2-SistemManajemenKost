@@ -79,7 +79,7 @@
                             </h5>
                         </a>
                             {!! $room->description !!}
-                        <a href={{ route('bookingForm') }} class="btn btn-outline-warning btn-sm">Booking</a>
+                        <a href="{{ route('bookingForm', $room->id) }}" class="btn btn-outline-warning btn-sm">Booking</a>
                     </div>
                 </div>
             </div>

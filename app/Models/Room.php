@@ -93,4 +93,11 @@ class Room extends Model
             'status' => 'available',
         ]);
     }
+
+    public static function updateStatusBooked($id)
+    {
+        Room::where('id', $id)->update([
+            'status' => 'booked',
+        ]);
+    }
 }

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\LoginAuthController;
+use App\Http\Controllers\Api\AuthController;
 
 
 /*
@@ -23,3 +24,4 @@ use App\Http\Controllers\Api\LoginAuthController;
 Route::post('auth/login', [LoginAuthController::class, 'login']);
 
 Route::apiResource('messages', MessageController::class);
+Route::post('auth/login', [AuthController::class, 'login']);

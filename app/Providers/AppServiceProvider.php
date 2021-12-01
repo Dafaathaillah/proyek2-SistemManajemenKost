@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use Illuminate\Console\Events\CommandFinished;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\JsonResource;
+use NunoMaduro\LaravelDesktopNotifier\Notification;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +28,25 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         JsonResource::withoutWrapping();
+        Event::listen(CommandFinished::class, function (CommandFinished $event){
+            if ($event->command === 'test') {
+                $passed = !$event->exitCode;
+                $this->notify($passed);
+            }
+        });
+    }
+
+    public function notify($passed)
+    {
+        $notification = (new Notification())
+        ->setTitle('Transaksi Berhasil')
+        ->setBody(
+            $passed ?
+                    'berhasil melakukan pembayaran' :
+                    'pengguna'
+
+        );
+
+        $this->app->make('desktop.notifier')->send($notification);
     }
 }
