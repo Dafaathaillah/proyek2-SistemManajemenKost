@@ -70,6 +70,8 @@ Coded by www.creative-tim.com
     @yield('content')
     <!-- End Page Content -->
 
+    @include('sweetalert::alert')
+
     <!-- Footer -->
     @include('layouts.partials.web_footer')
     <!-- End Footer -->
@@ -117,7 +119,7 @@ Coded by www.creative-tim.com
 
         if (document.querySelector('.datepicker')) {
             flatpickr('.datepicker', {
-                mode: "range"
+                mode: "single"
             }); // flatpickr
         }
 

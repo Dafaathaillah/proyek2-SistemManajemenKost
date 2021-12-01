@@ -20,6 +20,7 @@ class Booking extends Model
         'customer_id',
         'check_in_date',
         'status',
+        'temporary_password',
     ];
 
     public function customer()
@@ -32,49 +33,23 @@ class Booking extends Model
         return Booking::all();
     }
 
-    public static function store(Request $request)
+    public static function store(Request $request, $id, $password)
     {
-        $customer = Customer::create([
-            'id_number' => $request->id_number,
-            'room_id' => $request->room_id,
-            'gender' => $request->gender,
-            'address' => $request->address,
-            'whatsapp_number' => $request->whatsapp_number,
-        ]);
-
         Booking::create([
-            'customer_id' => $customer->id,
+            'customer_id' => $id,
             'check_in_date' => $request->check_in_date,
+            'status' => 'pending',
+            'temporary_password' => $password,
         ]);
 
     }
 
-    public static function updateStatus($booking)
+    public static function updateStatus($booking, $status)
     {
-        if ($booking->status == 'pending') {
-            Booking::updateStatusAvailable($booking->customer_id);
-            $booking->update([
-                'status' => 'pending',
-            ]);
-            
-        } else if ($booking->status == 'reject') {
-            Booking::updateStatusAvailable($booking->customer_id);
-            $booking->update([
-                'status' => 'reject',
-            ]);
-            
-        } else if ($booking->status == 'expired') {
-            Booking::updateStatusAvailable($booking->customer_id);
-            $booking->update([
-                'status' => 'expired',
-            ]);
-            
-        } else {
-            Booking::updateStatusNotAvailable($booking->customer_id);
-            $booking->update([
-                'status' => 'accept',
-            ]);
-        }
+        $customer = Customer::find($booking->customer_id);
+        Customer::updateStatus($customer);
+        $booking->update([
+            'status' => $status,
+        ]);
     }
-
 }

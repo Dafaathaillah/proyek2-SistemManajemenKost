@@ -12,6 +12,11 @@
 @endsection
 
 @section('content')
+@if (session()->has('url'))
+<script>
+    window.open('{{ session()->get('url') }}', "_blank");
+</script>
+@endif
 <div class="row">
     <div class="col-12">
         <div class="card mb-4">
@@ -25,7 +30,7 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                     Kamar</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                    No. Telp/WhatsApp</th>
+                                    Tanggal Pesan</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center"
                                     style="width: 220px">
@@ -33,45 +38,41 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($customers as $customer)
+                            @foreach ($bookings as $booking)
                                 <tr>
-                                    <td class="text-sm font-weight-normal">{{ $customer->user->name }}</td>
-                                    <td class="text-sm font-weight-normal">{{ $customer->room->name }}</td>
+                                    <td class="text-sm font-weight-normal">{{ $booking->customer->user->name }}</td>
+                                    <td class="text-sm font-weight-normal">{{ $booking->customer->room->name }}</td>
+                                    <td class="text-sm font-weight-normal">{{ $booking->created_at->format('d M Y') }}</td>
                                     <td class="text-sm font-weight-normal">
-                                        @if ($customer->phone_number == $customer->whatsapp_number)
-                                           <a href="https://wa.me/62{{ ltrim($customer->phone_number, '0') }}" target="_blank">{{ $customer->phone_number . ' (WhatsApp)' }}</a>
+                                        @if ($booking->status == 'pending')
+                                            <span class="badge badge-warning text-dark">Pending</span>
+                                        @elseif ($booking->status == 'accept')
+                                            <span class="badge badge-success text-dark">Accept</span>
                                         @else
-                                           {{ $customer->phone_number }}/<a href="https://wa.me/62{{ ltrim($customer->whatsapp_number, '0') }}" target="_blank">{{ $customer->whatsapp_number  . ' (WhatsApp)' }}</a>
-                                        @endif
-                                    </td>
-                                    <td class="text-sm font-weight-normal">
-                                        @if ($customer->status == 'active')
-                                            <a href="{{ route('customers.updateStatus', $customer->id) }}" title="Klik untuk mengubah status customer"><span class="badge badge-success text-dark">Active</span></a>
-                                        @else
-                                            <a href="{{ route('customers.updateStatus', $customer->id) }}" title="Klik untuk mengubah status customer"><span class="badge badge-danger text-dark">Inactive</span></a>
+                                            <span class="badge badge-danger text-dark">Reject</span>
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Detail customer" data-bs-toggle="modal" data-bs-target="#detail{{ $customer->id }}">
+                                        <a href="#" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Detail booking" data-bs-toggle="modal" data-bs-target="#detail{{ $booking->id }}">
                                             <i class="fa fa-clipboard"></i>&nbsp; Detail &nbsp;
                                         </a>
-                                        <a href="{{ route('customers.edit', $customer->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit customer">
-                                            <i class="fa fa-edit"></i>&nbsp; Edit &nbsp;
-                                        </a>
-                                        <form action="{{ route('customers.destroy', $customer->id) }}" method="post" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <a href="#" class="text-secondary font-weight-bold text-xs" onclick="this.closest('form').submit();return false;"> 
-                                                <i class="fa fa-trash"></i> Delete &nbsp;
+                                        @if ($booking->status == 'pending')
+                                            <a href="{{ route('bookings.updateStatus', [$booking->id, 'accept']) }}" 
+                                                class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" 
+                                                data-original-title="Accept booking">
+                                                <i class="fa fa-check"></i>&nbsp; Accept &nbsp;
                                             </a>
-                                        </form>
+                                            <a href="{{ route('bookings.updateStatus', [$booking->id, 'reject']) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Reject booking"> 
+                                                <i class="fa fa-close"></i> Reject &nbsp;
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
-                                <div class="modal fade" id="detail{{ $customer->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                                <div class="modal fade" id="detail{{ $booking->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                                     <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h6 class="modal-title" id="modal-title-default">Detail Customer</h6>
+                                                <h6 class="modal-title" id="modal-title-default">Detail Booking</h6>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">×</span>
                                                 </button>
@@ -79,31 +80,31 @@
                                             <div class="modal-body">
                                                 <dl class="row">
                                                     <dt class="col-sm-4">Nama Lengkap</dt>
-                                                    <dd class="col-sm-8">{{ $customer->user->name }}</dd>
+                                                    <dd class="col-sm-8">{{ $booking->customer->user->name }}</dd>
                                                   
                                                     <dt class="col-sm-4">No. KTP</dt>
-                                                    <dd class="col-sm-8">{{ $customer->id_number }}</dd>
+                                                    <dd class="col-sm-8">{{ $booking->customer->id_number }}</dd>
                                                   
                                                     <dt class="col-sm-4">Jenis Kelamin</dt>
-                                                    <dd class="col-sm-8">{{ $customer->gender == 'L' ? 'Laki-Laki' : 'Perempuan' }}</dd>
+                                                    <dd class="col-sm-8">{{ $booking->customer->gender == 'L' ? 'Laki-Laki' : 'Perempuan' }}</dd>
                                                   
                                                     <dt class="col-sm-4">Kamar</dt>
-                                                    <dd class="col-sm-8">{{ $customer->room->name }}</dd>
+                                                    <dd class="col-sm-8">{{ $booking->customer->room->name }}</dd>
                                                   
                                                     <dt class="col-sm-4">Kontak</dt>
                                                     <dd class="col-sm-8">
-                                                        @if ($customer->phone_number == $customer->whatsapp_number)
-                                                            <a href="https://wa.me/62{{ ltrim($customer->phone_number, '0') }}" target="_blank">{{ $customer->phone_number . ' (WhatsApp)' }}</a>
+                                                        @if ($booking->customer->phone_number == $booking->customer->whatsapp_number || $booking->customer->phone_number == null)
+                                                            <a href="https://wa.me/62{{ ltrim($booking->customer->whatsapp_number, '0') }}" target="_blank">{{ $booking->customer->whatsapp_number . ' (WhatsApp)' }}</a>
                                                         @else
-                                                            {{ $customer->phone_number }} / <br> <a href="https://wa.me/62{{ ltrim($customer->whatsapp_number, '0') }}" target="_blank">{{ $customer->whatsapp_number  . ' (WhatsApp)' }}</a>
+                                                            {{ $booking->customer->phone_number }} / <br> <a href="https://wa.me/62{{ ltrim($booking->customer->whatsapp_number, '0') }}" target="_blank">{{ $booking->customer->whatsapp_number  . ' (WhatsApp)' }}</a>
                                                         @endif
                                                     </dd>
 
                                                     <dt class="col-sm-4">Alamat</dt>
-                                                    <dd class="col-sm-8">{{ $customer->address }}</dd>
+                                                    <dd class="col-sm-8">{{ $booking->customer->address }}</dd>
 
                                                     <dt class="col-sm-4">Email Kamar</dt>
-                                                    <dd class="col-sm-8">{{ $customer->user->email }}</dd>
+                                                    <dd class="col-sm-8">{{ $booking->customer->user->email }}</dd>
                                                 </dl>
                                             </div>
                                             <div class="modal-footer">
@@ -129,6 +130,5 @@
             searchable: true,
             fixedHeight: true
         });
-
     </script>
 @endpush

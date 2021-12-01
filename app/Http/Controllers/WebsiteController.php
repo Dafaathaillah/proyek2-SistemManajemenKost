@@ -32,19 +32,9 @@ class WebsiteController extends Controller
 
     public function bookingForm($id)
     {
-        $rooms = Room::findOrFail($id);
-        $boardinghouses = BoardingHouse::all();
-        return view('website.booking_form', compact('rooms', 'boardinghouses'));
-    }
-
-    public function storeBookingForm(Request $request)
-    {    
-
-        $boardinghouses = BoardingHouse::all();
-
-        Booking::store($request);
-        Alert::toast('Booking telah berhasil.', 'success');
-        return view('website.landing_page', compact('boardinghouses'));
+        $room = Room::findOrFail($id);
+        $boardingHouse = BoardingHouse::first();
+        return view('website.booking_form', compact('room', 'boardingHouse'));
     }
 
     public function contactUs()
